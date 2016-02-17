@@ -2,6 +2,7 @@ package com.kitri.fpgw.service;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kitri.fpgw.dao.UserDao;
@@ -10,6 +11,7 @@ import com.kitri.fpgw.model.UserDto;
 @Service
 public class UserServiceImpl implements UserService {
 
+	@Autowired
 	private UserDao userDao;
 	
 	@Override

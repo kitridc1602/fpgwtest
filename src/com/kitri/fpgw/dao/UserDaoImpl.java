@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kitri.fpgw.model.UserDto;
@@ -11,6 +12,7 @@ import com.kitri.fpgw.model.UserDto;
 @Repository
 public class UserDaoImpl implements UserDao {
 
+	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	@Override

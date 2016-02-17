@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Schedule">
+
+	<select id="ScheduleSelect" parameterType="com.kitri.fpgw.model.ScheduleDto" resultType="com.kitri.fpgw.model.ScheduleDto">
+	
+	</select>
+	
+	<select id="ScheduleSelectAll" parameterType="com.kitri.fpgw.model.ScheduleDto" resultType="com.kitri.fpgw.model.ScheduleDto">
+	
+	</select>
+	
+	<update id="ScheduleModify" parameterType="com.kitri.fpgw.model.ScheduleDto">
+	
+	</update>
+	
+	<delete id="ScheduleDelete" parameterType="com.kitri.fpgw.model.ScheduleDto">
+	
+	</delete>
+</mapper>
