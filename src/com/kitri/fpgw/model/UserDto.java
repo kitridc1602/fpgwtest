@@ -1,5 +1,7 @@
 package com.kitri.fpgw.model;
 
+import java.util.Date;
+
 public class UserDto {
 
 	private String strCode;
@@ -48,7 +50,11 @@ public class UserDto {
 	private String strFace_Path;
 	private String strSign_Name;
 	private String strSign_Path;
-		
+	private String strGet_User;
+	private Date datGet_Date;
+	private String strEdit_User;
+	private Date datEdit_Date;
+	
 	public UserDto() {
 		
 	}
@@ -62,7 +68,8 @@ public class UserDto {
 			String strZip2, String strAddr1, String strAddr2, String strHome_Page, int intWedding_Flag,
 			String strWedding_YYYY, String strWedding_MM, String strWedding_DD, String strHobby, String strResume,
 			String strIntroduction, String strMemo, String strFace_Name, String strFace_Path, String strSign_Name,
-			String strSign_Path) {
+			String strSign_Path, String strGet_User, Date datGet_Date, String strEdit_User, Date datEdit_Date) {
+		super();
 		this.strCode = strCode;
 		this.strName = strName;
 		this.strID = strID;
@@ -109,6 +116,10 @@ public class UserDto {
 		this.strFace_Path = strFace_Path;
 		this.strSign_Name = strSign_Name;
 		this.strSign_Path = strSign_Path;
+		this.strGet_User = strGet_User;
+		this.datGet_Date = datGet_Date;
+		this.strEdit_User = strEdit_User;
+		this.datEdit_Date = datEdit_Date;
 	}
 
 	public String getStrCode() {
@@ -479,7 +490,36 @@ public class UserDto {
 		this.strSign_Path = strSign_Path;
 	}
 
-	
+	public String getStrGet_User() {
+		return strGet_User;
+	}
 
-		
+	public void setStrGet_User(String strGet_User) {
+		this.strGet_User = strGet_User;
+	}
+
+	public Date getDatGet_Date() {
+		return datGet_Date;
+	}
+
+	public void setDatGet_Date(Date datGet_Date) {
+		this.datGet_Date = datGet_Date;
+	}
+
+	public String getStrEdit_User() {
+		return strEdit_User;
+	}
+
+	public void setStrEdit_User(String strEdit_User) {
+		this.strEdit_User = strEdit_User;
+	}
+
+	public Date getDatEdit_Date() {
+		return datEdit_Date;
+	}
+
+	public void setDatEdit_Date(Date datEdit_Date) {
+		this.datEdit_Date = datEdit_Date;
+	}
+
 }

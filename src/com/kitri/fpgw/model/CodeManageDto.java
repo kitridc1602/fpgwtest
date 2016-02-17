@@ -1,5 +1,7 @@
 package com.kitri.fpgw.model;
 
+import java.util.Date;
+
 public class CodeManageDto {
 
 	private String strBCode;
@@ -11,13 +13,18 @@ public class CodeManageDto {
 	private String strValue3;
 	private int intSort;
 	private int intUse_Flag;
+	private String strGet_User;
+	private Date datGet_Date;
+	private String strEdit_User;
+	private Date datEdit_Date;
 		
 	public CodeManageDto() {
 		
 	}
-
+	
 	public CodeManageDto(String strBCode, String strBName, String strSCode, String strName, String strValue1,
-			String strValue2, String strValue3, int intSort, int intUse_Flag) {
+			String strValue2, String strValue3, int intSort, int intUse_Flag, String strGet_User, Date datGet_Date,
+			String strEdit_User, Date datEdit_Date) {
 		this.strBCode = strBCode;
 		this.strBName = strBName;
 		this.strSCode = strSCode;
@@ -27,6 +34,10 @@ public class CodeManageDto {
 		this.strValue3 = strValue3;
 		this.intSort = intSort;
 		this.intUse_Flag = intUse_Flag;
+		this.strGet_User = strGet_User;
+		this.datGet_Date = datGet_Date;
+		this.strEdit_User = strEdit_User;
+		this.datEdit_Date = datEdit_Date;
 	}
 
 	public String getStrBCode() {
@@ -99,6 +110,42 @@ public class CodeManageDto {
 
 	public void setIntUse_Flag(int intUse_Flag) {
 		this.intUse_Flag = intUse_Flag;
+	}
+
+	
+	public String getStrGet_User() {
+		return strGet_User;
+	}
+
+	
+	public void setStrGet_User(String strGet_User) {
+		this.strGet_User = strGet_User;
+	}
+
+	
+	public Date getDatGet_Date() {
+		return datGet_Date;
+	}
+
+	
+	public void setDatGet_Date(Date datGet_Date) {
+		this.datGet_Date = datGet_Date;
+	}
+
+	public String getStrEdit_User() {
+		return strEdit_User;
+	}
+
+	public void setStrEdit_User(String strEdit_User) {
+		this.strEdit_User = strEdit_User;
+	}
+
+	public Date getDatEdit_Date() {
+		return datEdit_Date;
+	}
+
+	public void setDatEdit_Date(Date datEdit_Date) {
+		this.datEdit_Date = datEdit_Date;
 	}
 
 	
