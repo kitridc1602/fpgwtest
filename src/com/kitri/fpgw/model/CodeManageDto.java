@@ -11,6 +11,7 @@ public class CodeManageDto {
 	private String strValue1;
 	private String strValue2;
 	private String strValue3;
+	private String strValue4;
 	private int intSort;
 	private int intUse_Flag;
 	private String strGet_User_Cd;
@@ -99,6 +100,14 @@ public class CodeManageDto {
 
 	public void setStrValue3(String strValue3) {
 		this.strValue3 = strValue3;
+	}
+	
+	public String getStrValue4() {
+		return strValue4;
+	}
+
+	public void setStrValue4(String strValue4) {
+		this.strValue4 = strValue4;
 	}
 
 	public int getIntSort() {

@@ -5,7 +5,7 @@
 <html lang="en">
           <!-- start: content -->
             <div id="content">
-                <div class="panel">
+                <div class="panel ">
                	
                   <div class="panel-body">
                     <div class="col-md-6 col-sm-12">
@@ -18,11 +18,18 @@
                   </div>                    
 
                </div>
-                <div>
-                	<!-- 실제 화면 구동부분 -->
-                	<div id='calendar'></div>
-                </div>
-      		  </div>
+             	<div class="panel">
+                  	<div class="panel-heading"><h3></h3></div>
+                  		<div class="panel-body">
+                    		<div class="col-md-3">
+                   			</div>
+                    		<div class="col-md-9">
+                      			<div id='calendar'></div>
+                    		</div>
+                    
+                  		</div>
+                	</div>
+       		  </div>
           <!-- end: content -->
 
 </html>

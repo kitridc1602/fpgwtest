@@ -34,6 +34,7 @@
 			<list>
 				<value>com.kitri.fpgw.dao.MainDao</value>
 				<value>com.kitri.fpgw.dao.UserDao</value>
+				<value>com.kitri.fpgw.dao.ScheduleDao</value>
 			</list>
 		</property>
 	</bean>
