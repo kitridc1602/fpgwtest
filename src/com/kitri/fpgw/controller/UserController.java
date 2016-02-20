@@ -15,7 +15,7 @@ public class UserController {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		
+		mav.setViewName("jsp/user/input");
 		return mav;
 	}
 	
