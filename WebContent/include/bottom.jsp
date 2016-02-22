@@ -273,13 +273,13 @@
 <!-- 부서, 조직도 선택시 해당값 처리 Script --> 
 <script type="text/javascript">
 
-	var varObjectCode = null;
-	var varObjectName = null;
+	var varObjectCode = "";
+	var varObjectName = "";
 	
 	function selectImport(strCode, strName) {
-		
-		varObjectCode.value = strCode;
-		varObjectName.innerHTML = strName;
+				
+		varObjectCode = strCode;
+		varObjectName = strName;
 	}
 	
 	function selectOrganization(strCode, strName){
@@ -289,15 +289,11 @@
 	}
 
 	function selectExport(varCode, varName) {
-		
-		alert(varObjectCode);
-		alert(varObjectName);
-		
-		varObjectCode.value = varCode.value;
-		varObjectName.innerHTML = varName.innerHTML;
+				
+		document.getElementById(varObjectCode).value = document.getElementById(varCode).value;
+		document.getElementById(varObjectName).innerHTML = document.getElementById(varName).innerHTML;
 	}
-	
-	
+
 </script>
 
 
@@ -350,7 +346,7 @@
 				<input type="hidden" id="selectusercode" name="selectusercode">
 				<label id="selectusername" name="selectusername"></label>
 				<button type="button" class="btn btn-default" data-dismiss="modal">종료</button>
-				<button type="button" class="btn btn-primary" onclick="selectExport(selectusercode, selectusername)">선택</button>
+				<button type="button" id="selectbutton" class="btn btn-primary"data-dismiss="modal" onclick="selectExport('selectusercode', 'selectusername')">선택</button>
 			</div>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->

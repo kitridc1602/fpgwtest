@@ -62,7 +62,7 @@
 	                   								<input type="hidden" id="apprcode1" name="apprcode1">
 	                   							</td>
 	                   							<td style="width: 2%; text-align: center;">
-	                   								<a href="#"  data-toggle="modal" data-target="#organization" onclick="selectImport(apprcode1, apprname1)">
+	                   								<a href="#"  data-toggle="modal" data-target="#organization" onclick="selectImport('apprcode1', 'apprname1')">
 	                   									<i class="fa fa-plus-square"></i>
                    									</a>
                									</td>
@@ -70,7 +70,8 @@
 	                   								<label style="width: 100%;" id="apprname2">과장 김미희</label>
 	                   								<input type="hidden" id="apprcode2" name="apprcode2">
 	                   							</td>
-	                   							<td style="width: 2%; text-align: center;"><a href="#"  data-toggle="modal" data-target="#organization" onclick="selectImport(apprcode2, apprname2)">
+	                   							<td style="width: 2%; text-align: center;">
+	                   								<a href="#"  data-toggle="modal" data-target="#organization" onclick="selectImport('apprcode2', 'apprname2')">
 	                   									<i class="fa fa-plus-square"></i>
                    									</a>
                									</td>
@@ -78,17 +79,29 @@
 	                   								<label style="width: 100%;" id="apprname3">팀장 박대성</label>
 	                   								<input type="hidden" id="apprcode3" name="apprcode3">
 	                   							</td>
-	                   							<td style="width: 2%; text-align: center;"><a href=""><i class="fa fa-plus-square"></i></a></td>
+	                   							<td style="width: 2%; text-align: center;">
+	                   								<a href="#"  data-toggle="modal" data-target="#organization" onclick="selectImport('apprcode3', 'apprname3')">
+	                   									<i class="fa fa-plus-square"></i>
+                   									</a>
+               									</td>
 	                   							<td style="width: 15%; text-align: center;">
 	                   								<label style="width: 100%;" id="apprname4"></label>
 	                   								<input type="hidden" id="apprcode4" name="apprcode4">
 	                   							</td>
-	                   							<td style="width: 2%; text-align: center;"><a href=""><i class="fa fa-plus-square"></i></a></td>
+	                   							<td style="width: 2%; text-align: center;">
+	                   								<a href="#"  data-toggle="modal" data-target="#organization" onclick="selectImport('apprcode4', 'apprname4')">
+	                   									<i class="fa fa-plus-square"></i>
+                   									</a>
+               									</td>
 	                   							<td style="width: 15%; text-align: center;">
 	                   								<label style="width: 100%;" id="apprname5"></label>
 	                   								<input type="hidden" id="apprcode5" name="apprcode5">
                    								</td>
-	                   							<td style="width: 2%; text-align: center;"><a href=""><i class="fa fa-plus-square"></i></a></td>
+	                   							<td style="width: 2%; text-align: center;">
+	                   								<a href="#"  data-toggle="modal" data-target="#organization" onclick="selectImport('apprcode5', 'apprname5')">
+	                   									<i class="fa fa-plus-square"></i>
+                   									</a>
+               									</td>
 	                   						</tr>
 	                   						<tr>
 	                   							<td style="width: 12%;  text-align: center;">협 조</td>
@@ -96,27 +109,47 @@
 	                   								<label style="width: 100%;" id="coopername1">주임 김명섭</label>
 	                   								<input type="hidden" id="coopercode1" name="coopercode1">
 	                   							</td>
-	                   							<td style="width: 2%; text-align: center;"><a href=""><i class="fa fa-plus-square"></i></a></td>
+	                   							<td style="width: 2%; text-align: center;">
+	                   								<a href="#"  data-toggle="modal" data-target="#organization" onclick="selectImport('coopercode1', 'coopername1')">
+	                   									<i class="fa fa-plus-square"></i>
+                   									</a>
+               									</td>
 	                   							<td style="width: 15%; text-align: center;">
 	                   								<label style="width: 100%;" id="coopername2"></label>
 	                   								<input type="hidden" id="coopercode2" name="coopercode2">
 	                   							</td>
-	                   							<td style="width: 2%; text-align: center;"><a href=""><i class="fa fa-plus-square"></i></a></td>
+	                   							<td style="width: 2%; text-align: center;">
+	                   								<a href="#"  data-toggle="modal" data-target="#organization" onclick="selectImport('coopercode2', 'coopername2')">
+	                   									<i class="fa fa-plus-square"></i>
+                   									</a>
+               									</td>
 	                   							<td style="width: 15%; text-align: center;">
 	                   								<label style="width: 100%;" id="coopername3"></label>
 	                   								<input type="hidden" id="coopercode3" name="coopercode3">
 	                   							</td>
-	                   							<td style="width: 2%; text-align: center;"><a href=""><i class="fa fa-plus-square"></i></a></td>
+	                   							<td style="width: 2%; text-align: center;">
+	                   								<a href="#"  data-toggle="modal" data-target="#organization" onclick="selectImport('coopercode3', 'coopername3')">
+	                   									<i class="fa fa-plus-square"></i>
+                   									</a>
+               									</td>
 	                   							<td style="width: 15%; text-align: center;">
 	                   								<label style="width: 100%;" id="coopername4"></label>
 	                   								<input type="hidden" id="coopercode4" name="coopercode4">
 	                   							</td>
-	                   							<td style="width: 2%; text-align: center;"><a href=""><i class="fa fa-plus-square"></i></a></td>
+	                   							<td style="width: 2%; text-align: center;">
+	                   								<a href="#"  data-toggle="modal" data-target="#organization" onclick="selectImport('coopercode4', 'coopername4')">
+	                   									<i class="fa fa-plus-square"></i>
+                   									</a>
+               									</td>
 	                   							<td style="width: 15%; text-align: center;">
 	                   								<label style="width: 100%;" id="coopername5"></label>
 	                   								<input type="hidden" id="coopercode5" name="coopercode5">
                    								</td>
-	                   							<td style="width: 2%; text-align: center;"><a href=""><i class="fa fa-plus-square"></i></a></td>
+	                   							<td style="width: 2%; text-align: center;">
+	                   								<a href="#"  data-toggle="modal" data-target="#organization" onclick="selectImport('coopercode5', 'coopername5')">
+	                   									<i class="fa fa-plus-square"></i>
+                   									</a>
+               									</td>
 	                   						</tr>
 	                   						<tr>
 	                   							<td style="width: 12%;  text-align: center;">수신부서</td>
