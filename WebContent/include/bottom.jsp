@@ -228,8 +228,6 @@
               </div>
             </div>  
           <!-- end: right menu -->
-          
-      </div>
 
       <!-- start: Mobile -->
       <div id="mimin-mobile" class="reverse">
@@ -249,7 +247,7 @@
                       				
                       					<c:if test="${secondMenu.intLevel eq 2 && firstMenu.strCode eq secondMenu.strPCode }">
                       						
-                      						<li><a class="tree-toggle1 nav-header" href="${secondMenu.strPath }">${secondMenu.strName }
+                      						<li><a class="tree-toggle nav-header" href="${secondMenu.strPath }">${secondMenu.strName }
                       								<span class="fa-angle-right fa right-arrow text-right"></span>
                    								</a>
                 							</li>
@@ -272,6 +270,94 @@
       </button>
        <!-- end: Mobile -->
 
+<!-- 부서, 조직도 선택시 해당값 처리 Script --> 
+<script type="text/javascript">
+
+	var varObjectCode = null;
+	var varObjectName = null;
+	
+	function selectImport(strCode, strName) {
+		
+		varObjectCode.value = strCode;
+		varObjectName.innerHTML = strName;
+	}
+	
+	function selectOrganization(strCode, strName){
+		
+		document.getElementById("selectusercode").value = strCode;
+		document.getElementById("selectusername").innerHTML = strName;		
+	}
+
+	function selectExport(varCode, varName) {
+		
+		alert(varObjectCode);
+		alert(varObjectName);
+		
+		varObjectCode.value = varCode.value;
+		varObjectName.innerHTML = varName.innerHTML;
+	}
+	
+	
+</script>
+
+
+<div class="modal fade" id="organization">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">조직도</h4>
+			</div>
+			<div class="modal-body">
+				<div id="sidetreecontrol">
+				<h4><a href="?#">KITRI</a></h4>
+				</div>
+				<ul id="organizationtree" class="nav nav-list">
+                	 <c:forEach var="firstDepart" items="${DepartList}">
+                    
+                    	<c:if test="${firstDepart.intLevel eq 1 }">
+                    		<li class="ripple">
+                      			<a class="tree-toggle nav-header"><span class="icon-folder-alt"></span> ${firstDepart.strName }</a>
+                      			<ul class="nav nav-list tree">
+                      				<c:forEach var="secondDepart" items="${DepartList }">
+                      				
+                      					<c:if test="${secondDepart.intLevel eq 2 && firstDepart.strCode eq secondDepart.strPCode }">
+                      						
+                      						<li class="ripple"><a class="sub-tree-toggle nav-header"><span class="fa fa-folder"></span> ${secondDepart.strName }</a>
+                   								<ul class="nav nav-list sub-tree">
+                   									<c:forEach var="userList" items="${DepartUserList }">
+                   										<c:if test="${secondDepart.strCode eq userList.strDepart_Cd }">
+                   											<li id="selectuser" value="${userList.strCode }">
+                   												<a class="" onclick="selectOrganization('${userList.strCode }', '${userList.strPosition_Nm }&nbsp;${userList.strName }')"><span class="icon-user"></span> ${userList.strPosition_Nm } ${userList.strName }</a>
+          													</li>
+                   										</c:if>
+                   									</c:forEach>
+                   								</ul>
+                							</li>
+                      							
+                      					</c:if>
+                      					
+                      				</c:forEach>
+                          			
+                      			</ul>
+                    		</li>	
+                    	</c:if>
+                    
+                    </c:forEach>   
+                </ul>
+			</div>
+			<div class="modal-footer">
+				<input type="hidden" id="selectusercode" name="selectusercode">
+				<label id="selectusername" name="selectusername"></label>
+				<button type="button" class="btn btn-default" data-dismiss="modal">종료</button>
+				<button type="button" class="btn btn-primary" onclick="selectExport(selectusercode, selectusername)">선택</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div>
+
+<!--end : organization modal -->
+
     <!-- start: Javascript -->
     <!-- plugins -->
     <script src="${root }/js/plugins/moment.min.js"></script>
@@ -281,8 +367,7 @@
     <script src="${root }/js/plugins/maps/jquery.vmap.world.js"></script>
     <script src="${root }/js/plugins/jquery.vmap.sampledata.js"></script>
     <script src="${root }/js/plugins/chart.min.js"></script>
-
-
+	
 	<!-- plugins date-time-picker js -->
 	<script src="${root }/js/plugins/bootstrap-material-datetimepicker.js"></script>
     
@@ -290,6 +375,7 @@
     <%-- <script src="${root }/js/plugins/jquery.datatables.min.js"></script>
     <script src="${root }/js/plugins/datatables.bootstrap.min.js"></script> --%>
 
+	
     <!-- custom -->
      <script src="${root }/js/main.js"></script>
      <!-- 캘린더 한글 지원 -->
@@ -430,6 +516,7 @@
 		});
 		
 	</script> -->
+
   <!-- end: Javascript -->
   </body>
 </html>

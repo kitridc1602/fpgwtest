@@ -45,8 +45,7 @@
 	<script src="${root }/js/plugins/jquery.nicescroll.js"></script>
 	<!-- 구글 위치정보 서비스 API -->
 	<script src="http://maps.googleapis.com/maps/api/js"></script>
-	
-	
+			
   </head>
 
  <body id="mimin" class="dashboard">

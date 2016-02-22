@@ -3,6 +3,7 @@
 <c:set var="root" value="${pageContext.request.contextPath }"/>
 <!DOCTYPE html>
 <html lang="en">
+
           <!-- start: content -->
             <div id="content">
                 <div class="panel">
@@ -57,27 +58,34 @@
 	                   						<tr>
 	                   							<td style="width: 12%;  text-align: center;">결 재</td>
 	                   							<td style="width: 15%; text-align: center;">
-	                   								<label style="width: 100%;" id="apprname1" name="apprname1">대리 심응규</label>
+	                   								<label style="width: 100%;" id="apprname1">대리 심응규</label>
 	                   								<input type="hidden" id="apprcode1" name="apprcode1">
 	                   							</td>
-	                   							<td style="width: 2%; text-align: center;"><a href=""><i class="fa fa-plus-square"></i></a></td>
+	                   							<td style="width: 2%; text-align: center;">
+	                   								<a href="#"  data-toggle="modal" data-target="#organization" onclick="selectImport(apprcode1, apprname1)">
+	                   									<i class="fa fa-plus-square"></i>
+                   									</a>
+               									</td>
 	                   							<td style="width: 15%; text-align: center;">
-	                   								<label style="width: 100%;" id="apprname2" name="apprname2">과장 김미희</label>
+	                   								<label style="width: 100%;" id="apprname2">과장 김미희</label>
 	                   								<input type="hidden" id="apprcode2" name="apprcode2">
 	                   							</td>
-	                   							<td style="width: 2%; text-align: center;"><a href=""><i class="fa fa-plus-square"></i></a></td>
+	                   							<td style="width: 2%; text-align: center;"><a href="#"  data-toggle="modal" data-target="#organization" onclick="selectImport(apprcode2, apprname2)">
+	                   									<i class="fa fa-plus-square"></i>
+                   									</a>
+               									</td>
 	                   							<td style="width: 15%; text-align: center;">
-	                   								<label style="width: 100%;" id="apprname3" name="apprname3">팀장 박대성</label>
+	                   								<label style="width: 100%;" id="apprname3">팀장 박대성</label>
 	                   								<input type="hidden" id="apprcode3" name="apprcode3">
 	                   							</td>
 	                   							<td style="width: 2%; text-align: center;"><a href=""><i class="fa fa-plus-square"></i></a></td>
 	                   							<td style="width: 15%; text-align: center;">
-	                   								<label style="width: 100%;" id="apprname4" name="apprname4"></label>
+	                   								<label style="width: 100%;" id="apprname4"></label>
 	                   								<input type="hidden" id="apprcode4" name="apprcode4">
 	                   							</td>
 	                   							<td style="width: 2%; text-align: center;"><a href=""><i class="fa fa-plus-square"></i></a></td>
 	                   							<td style="width: 15%; text-align: center;">
-	                   								<label style="width: 100%;" id="apprname5" name="apprname5"></label>
+	                   								<label style="width: 100%;" id="apprname5"></label>
 	                   								<input type="hidden" id="apprcode5" name="apprcode5">
                    								</td>
 	                   							<td style="width: 2%; text-align: center;"><a href=""><i class="fa fa-plus-square"></i></a></td>
@@ -85,27 +93,27 @@
 	                   						<tr>
 	                   							<td style="width: 12%;  text-align: center;">협 조</td>
 	                   							<td style="width: 15%; text-align: center;">
-	                   								<label style="width: 100%;" id="coopername1" name="coopername1">주임 김명섭</label>
+	                   								<label style="width: 100%;" id="coopername1">주임 김명섭</label>
 	                   								<input type="hidden" id="coopercode1" name="coopercode1">
 	                   							</td>
 	                   							<td style="width: 2%; text-align: center;"><a href=""><i class="fa fa-plus-square"></i></a></td>
 	                   							<td style="width: 15%; text-align: center;">
-	                   								<label style="width: 100%;" id="coopername2" name="coopername2"></label>
+	                   								<label style="width: 100%;" id="coopername2"></label>
 	                   								<input type="hidden" id="coopercode2" name="coopercode2">
 	                   							</td>
 	                   							<td style="width: 2%; text-align: center;"><a href=""><i class="fa fa-plus-square"></i></a></td>
 	                   							<td style="width: 15%; text-align: center;">
-	                   								<label style="width: 100%;" id="coopername3" name="coopername3"></label>
+	                   								<label style="width: 100%;" id="coopername3"></label>
 	                   								<input type="hidden" id="coopercode3" name="coopercode3">
 	                   							</td>
 	                   							<td style="width: 2%; text-align: center;"><a href=""><i class="fa fa-plus-square"></i></a></td>
 	                   							<td style="width: 15%; text-align: center;">
-	                   								<label style="width: 100%;" id="coopername4" name="coopername4"></label>
+	                   								<label style="width: 100%;" id="coopername4"></label>
 	                   								<input type="hidden" id="coopercode4" name="coopercode4">
 	                   							</td>
 	                   							<td style="width: 2%; text-align: center;"><a href=""><i class="fa fa-plus-square"></i></a></td>
 	                   							<td style="width: 15%; text-align: center;">
-	                   								<label style="width: 100%;" id="coopername5" name="coopername5"></label>
+	                   								<label style="width: 100%;" id="coopername5"></label>
 	                   								<input type="hidden" id="coopercode5" name="coopercode5">
                    								</td>
 	                   							<td style="width: 2%; text-align: center;"><a href=""><i class="fa fa-plus-square"></i></a></td>
@@ -403,5 +411,4 @@
 					
            </div>
           <!-- end: content -->
-
 </html>

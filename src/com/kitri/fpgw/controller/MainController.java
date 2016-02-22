@@ -11,8 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kitri.fpgw.model.CodeManageDto;
+import com.kitri.fpgw.model.DepartDto;
 import com.kitri.fpgw.model.LogHistoryDto;
 import com.kitri.fpgw.model.MenuDto;
+import com.kitri.fpgw.model.UserBFDto;
 import com.kitri.fpgw.model.UserDetaileDto;
 import com.kitri.fpgw.model.UserDto;
 import com.kitri.fpgw.model.UserImageDto;
@@ -52,7 +54,7 @@ public class MainController {
 		UserMainDto userOut = MainService.LogIn(userIn);
 		
 		String strMovePage = "";
-
+		
 		if(userOut == null){
 			
 			session.setAttribute("success", "failed");
@@ -76,9 +78,17 @@ public class MainController {
 			session.setAttribute("userImageInfo", userImageInfo);
 			
 			/*전체 사용자*/
-			ArrayList<UserDto> allUser = MainService.UserListAll(userOut.getStrCode());
+			ArrayList<UserDto> allUser = MainService.UserListAll(userOut.getStrCode(), 0);
 			session.setAttribute("allUser", allUser);
 			
+			/*부서 정보*/
+			ArrayList<DepartDto> DepartList = MainService.DepartListAll();
+			session.setAttribute("DepartList", DepartList);
+			ArrayList<UserDto> DepartUserList = MainService.UserListAll(userOut.getStrCode(), 1);
+			session.setAttribute("DepartUserList", DepartUserList);
+			
+			
+						
 			/*기초정보*/
 			ArrayList<CodeManageDto> BCode = MainService.CodeManageBCodeGroupSelectAll();
 			session.setAttribute("BCode", BCode);
@@ -133,6 +143,14 @@ public class MainController {
 			CodeManageDto bcodeDto = BCode.get(i);
 			session.removeAttribute(bcodeDto.getStrValue4());
 		}
+		
+		session.removeAttribute("success");
+		session.removeAttribute("userInfo");
+		session.removeAttribute("userDetailInfo");
+		session.removeAttribute("userImageInfo");
+		session.removeAttribute("allUser");
+		session.removeAttribute("DepartList");
+		session.removeAttribute("menu");
 		
 		return "index";
 	}
