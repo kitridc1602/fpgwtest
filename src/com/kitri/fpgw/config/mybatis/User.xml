@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="User">
 
+	
 	<select id="userSelect" parameterType="String" resultType="com.kitri.fpgw.model.UserDto">
 		SELECT 	UM_CODE STRCODE, 					UM_NAME STRNAME,
 				UM_ID STRID, 						UM_PWD STRPWD,
@@ -77,7 +78,7 @@
 	
 	</insert>
 	
-	<update id="userModify" parameterType="com.kitri.fpgw.model.UserBFModifyDto" statementType="CALLABLE">
+	<update id="userModify" parameterType="ArrayList" statementType="CALLABLE">
 		{
 			CALL PROC_USER_UPDATE(#{userMainModifyDto}, #{userDetailModifyDto}, #{userImageModifyDto})
 		}
