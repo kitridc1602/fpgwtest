@@ -20,6 +20,7 @@
       <link rel="stylesheet" type="text/css" href="${root }/css/plugins/simple-line-icons.css"/>
       <link rel="stylesheet" type="text/css" href="${root }/css/plugins/animate.min.css"/>
       <link rel="stylesheet" type="text/css" href="${root }/css/plugins/fullcalendar.min.css"/>
+      <link rel="stylesheet" type="text/css" href="${root }/css/plugins/summernote.min.css"/>
       
       <!-- plugins date-time-picker css -->
 	  <link rel="stylesheet" type="text/css" href="${root }/css/plugins/bootstrap-material-datetimepicker.css" />
@@ -45,7 +46,8 @@
 	<script src="${root }/js/plugins/jquery.nicescroll.js"></script>
 	<!-- 구글 위치정보 서비스 API -->
 	<script src="http://maps.googleapis.com/maps/api/js"></script>
-			
+	
+	
   </head>
 
  <body id="mimin" class="dashboard">
@@ -159,5 +161,5 @@
                 </div>
             </div>
           <!-- end: Left Menu -->
-
+</div>
 </html>

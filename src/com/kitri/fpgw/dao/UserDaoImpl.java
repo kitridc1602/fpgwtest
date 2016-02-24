@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kitri.fpgw.model.UserBFModifyDto;
 import com.kitri.fpgw.model.UserDto;
 
 @Repository
@@ -18,7 +19,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public UserDto UserSelect(String strCode) throws Exception {
 		
-		return (UserDto) sqlSessionTemplate.selectList("userSelect", strCode);
+		return (UserDto) sqlSessionTemplate.selectOne("userSelect", strCode);
 	}
 
 	@Override
@@ -36,9 +37,9 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public void UserModify(UserDto userDto) throws Exception {
+	public void UserModify(UserBFModifyDto userBFModifyDto) throws Exception {
 
-		sqlSessionTemplate.update("userModify", userDto);
+		sqlSessionTemplate.update("userModify", userBFModifyDto);
 	}
 
 	@Override

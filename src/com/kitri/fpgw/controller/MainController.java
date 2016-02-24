@@ -61,7 +61,7 @@ public class MainController {
 			strMovePage = "index";
 		} else {
 			
-			session.setMaxInactiveInterval(84600);
+			session.setMaxInactiveInterval(84500);
 			/*로그인 기록*/			
 			LogHistoryDto LogHistoryDto = new LogHistoryDto();
 			LogHistoryDto.setStrLog_Ymd(ymd);

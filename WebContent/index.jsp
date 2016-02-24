@@ -12,7 +12,7 @@
 
 	<div>
 		<div style="width: 350px; margin-top: 200px; margin-left: auto; margin-right: auto;">
-			<form action="${root }/main/login.html" method="post">
+			<form id="userDto" action="${root }/main/login.html" method="post">
 				<table>
 					<tr>
 						<td colspan="3">

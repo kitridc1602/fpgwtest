@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kitri.fpgw.dao.UserDao;
+import com.kitri.fpgw.model.UserBFModifyDto;
 import com.kitri.fpgw.model.UserDto;
 
 @Service
@@ -33,9 +34,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void UserModify(UserDto userDto) throws Exception {
+	public void UserModify(UserBFModifyDto userBFModifyDto) throws Exception {
 
-		userDao.UserModify(userDto);
+		userDao.UserModify(userBFModifyDto);
 	}
 
 	@Override

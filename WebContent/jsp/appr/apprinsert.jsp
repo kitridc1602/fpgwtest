@@ -154,17 +154,22 @@
 	                   						<tr>
 	                   							<td style="width: 12%;  text-align: center;">수신부서</td>
 	                   							<td colspan="10">
-	                   								<input type="text" style="width: 95%;" id="receivedepartname" name="receivedepartname">
+	                   								
+	                   								<label style="width: 95%;" id="receivedepartname"></label>
 	                   								<input type="hidden" id="receivedepartcode" name="receivedepartcode">
-	                   								<a href=""><i class="fa fa-plus-square"></i></a>&nbsp;&nbsp;<i class="fa fa-refresh"></i>
+	                   								<a href=""  data-toggle="modal" data-target="#depart" onclick="selectImport('receivedepartcode', 'receivedepartname')">
+	                   									<i class="fa fa-plus-square"></i>
+                   									</a>&nbsp;&nbsp;<i class="fa fa-refresh"></i>
 	                   							</td>
 	                   						</tr>
 	                   						<tr>
 	                   							<td style="width: 12%;  text-align: center;">수신자</td>
 	                   							<td colspan="10">
-	                   								<input type="text" style="width: 95%;" id="receivename" name="receivename">
+	                   								<label style="width: 95%;" id="receivename"></label>
 	                   								<input type="hidden" id="receivecode" name="receivecode">
-	                   								<a href=""><i class="fa fa-plus-square"></i></a>&nbsp;&nbsp;<i class="fa fa-refresh"></i>
+	                   								<a href=""  data-toggle="modal" data-target="#organization" onclick="selectImport('receivecode', 'receivename')">
+	                   									<i class="fa fa-plus-square"></i>
+                  									</a>&nbsp;&nbsp;<i class="fa fa-refresh"></i>
 	                   							</td>
 	                   						</tr>
 	                   					</tbody>
