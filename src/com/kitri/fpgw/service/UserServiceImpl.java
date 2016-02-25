@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.kitri.fpgw.dao.UserDao;
 import com.kitri.fpgw.model.UserBFModifyDto;
 import com.kitri.fpgw.model.UserDto;
+import com.kitri.fpgw.model.UserModifyDto;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -34,9 +35,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void UserModify(UserBFModifyDto userBFModifyDto) throws Exception {
+	public void UserModify(UserModifyDto userModifyDto) throws Exception {
 
-		userDao.UserModify(userBFModifyDto);
+		userDao.UserModify(userModifyDto);
 	}
 
 	@Override

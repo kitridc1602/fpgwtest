@@ -16,7 +16,9 @@ import com.kitri.fpgw.model.UserDto;
 import com.kitri.fpgw.model.UserImageModifyDto;
 import com.kitri.fpgw.model.UserMainDto;
 import com.kitri.fpgw.model.UserMainModifyDto;
+import com.kitri.fpgw.model.UserModifyDto;
 import com.kitri.fpgw.service.UserService;
+import com.kitri.fpgw.util.StringClass;
 
 @Controller
 @RequestMapping(value="/user")
@@ -60,42 +62,34 @@ public class UserController {
 	}
 
 	@RequestMapping(value="/modify.html")
-	public String UserModify(@ModelAttribute("userDto") UserDto userDto, HttpSession session) throws Exception{
+	public ModelAndView UserModify(@ModelAttribute("userDto") UserDto userDto, HttpSession session) throws Exception{
+		
 		
 		UserMainDto userMainDto = (UserMainDto) session.getAttribute("userInfo");
 		
-		UserBFModifyDto userBFModifyDto = new UserBFModifyDto();
+		UserModifyDto userModifyDto = new UserModifyDto(
+				StringClass.NewWorkIDCreate(), userMainDto.getStrCode(), 
+				userDto.getStrCode(), userDto.getStrName(), userDto.getStrID(), userDto.getStrPWD(), 
+				userDto.getStrDepart_Cd(), "100", userDto.getStrPosition_Cd(), userDto.getIntLevel(),
+				userDto.getStrCo_Tel1(), userDto.getStrCo_Tel2(), userDto.getStrCo_Tel3(), userDto.getStrCo_Tel_InLine(),
+				userDto.getStrHire_YYYY(), userDto.getStrHire_MM(), userDto.getStrHire_DD(), userDto.getIntVacation_Count(), userDto.getIntUse_Flag(), 
+				userDto.getStrGender(), userDto.getStrBirth_YYYY(), userDto.getStrBirth_MM(), userDto.getStrBirth_DD(), userDto.getIntCalender_Kind(),  
+				userDto.getStrHome_Tel1(), userDto.getStrHome_Tel2(), userDto.getStrHome_Tel3(),  
+				userDto.getStrMobile1(), userDto.getStrMobile2(), userDto.getStrMobile3(),  
+				userDto.getStrZip1(), userDto.getStrZip2(), userDto.getStrAddr1(), userDto.getStrAddr2(), 
+				userDto.getStrHome_Page(), userDto.getIntWedding_Flag(), userDto.getStrWedding_YYYY(), userDto.getStrWedding_MM(), userDto.getStrWedding_DD(), 
+				userDto.getStrHobby(), userDto.getStrResume(), userDto.getStrIntroduction(), "", 
+				"", "", "", "");
+	
+		UserService.UserModify(userModifyDto);
 		
-		userBFModifyDto.setUserMainModifyDto(
-				new UserMainModifyDto(
-						userDto.getStrCode(), userDto.getStrName(), userDto.getStrID(), userDto.getStrPWD(), 
-						userDto.getStrDepart_Cd(), "100", userDto.getStrPosition_Cd(), userDto.getIntLevel(), 
-						userDto.getStrCo_Tel1(), userDto.getStrCo_Tel2(), userDto.getStrCo_Tel3(), userDto.getStrCo_Tel_InLine(), 
-						userDto.getStrHire_YYYY(), userDto.getStrHire_MM(), userDto.getStrHire_DD(), userDto.getIntVacation_Count(), 
-						1, null, null, userMainDto.getStrCode(), null));
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsp/user/usermanagelist");
 		
+		ArrayList<UserDto> userAllDto = UserService.UserSelectAll(); 
+		mav.addObject("userDto", userAllDto);
 		
-		userBFModifyDto.setUserDetailModifyDto(
-				new UserDetailModifyDto(
-						userDto.getStrCode(), userDto.getStrGender(), 
-						userDto.getStrBirth_YYYY(), userDto.getStrBirth_MM(), userDto.getStrBirth_DD(), userDto.getIntCalender_Kind(), 
-						userDto.getStrHome_Tel1(), userDto.getStrHome_Tel2(), userDto.getStrHome_Tel3(), 
-						userDto.getStrMobile1(), userDto.getStrMobile2(), userDto.getStrMobile3(), 
-						userDto.getStrZip1(), userDto.getStrZip2(), userDto.getStrAddr1(), userDto.getStrAddr2(), 
-						userDto.getStrHome_Page(), userDto.getIntWedding_Flag(), 
-						userDto.getStrWedding_YYYY(), userDto.getStrWedding_MM(), userDto.getStrWedding_DD(), 
-						userDto.getStrHobby(), userDto.getStrResume(), userDto.getStrIntroduction(), null, 
-						null, null,  userMainDto.getStrCode(), null));
-		
-		/*
-		userBFModifyDto.setUserImageModifyDto(
-				new UserImageModifyDto(
-						userDto.getStrCode(), userDto.getStrFace_Name(), userDto.getStrFace_Path(), userDto.getStrSign_Name(), userDto.getStrSign_Path(),  userMainDto.getStrCode(), null));
-		*/
-		UserService.UserModify(userBFModifyDto);
-		
-		
-		return "jsp/user/usermanagemodify";
+		return mav;
 	}
 	
 	@RequestMapping(value="/delete.html")

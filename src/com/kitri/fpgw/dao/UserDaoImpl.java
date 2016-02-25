@@ -7,8 +7,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kitri.fpgw.model.ProcedureParameterKeyDto;
 import com.kitri.fpgw.model.UserBFModifyDto;
 import com.kitri.fpgw.model.UserDto;
+import com.kitri.fpgw.model.UserModifyDto;
 
 @Repository
 public class UserDaoImpl implements UserDao {
@@ -37,9 +39,14 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public void UserModify(UserBFModifyDto userBFModifyDto) throws Exception {
-
-		sqlSessionTemplate.update("userModify", userBFModifyDto);
+	public void UserModify(UserModifyDto userModifyDto) throws Exception {
+		
+		if(sqlSessionTemplate.insert("userModifyTempInsert", userModifyDto) > 0){
+			
+			ProcedureParameterKeyDto procedureParameterKeyDto = new ProcedureParameterKeyDto(userModifyDto.getStrWorkID(), userModifyDto.getStrWork_User());
+			
+			sqlSessionTemplate.update("userModify", procedureParameterKeyDto);
+		}
 	}
 
 	@Override
