@@ -2,20 +2,12 @@ package com.kitri.fpgw.controller;
 
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kitri.fpgw.model.UserBFModifyDto;
-import com.kitri.fpgw.model.UserDetailModifyDto;
 import com.kitri.fpgw.model.UserDto;
-import com.kitri.fpgw.model.UserImageModifyDto;
-import com.kitri.fpgw.model.UserMainDto;
-import com.kitri.fpgw.model.UserMainModifyDto;
 import com.kitri.fpgw.model.UserModifyDto;
 import com.kitri.fpgw.service.UserService;
 import com.kitri.fpgw.util.StringClass;
@@ -51,24 +43,42 @@ public class UserController {
 	
 	@RequestMapping(value="/selectall.html")
 	public ModelAndView UserSelectAll() throws Exception{
-		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("jsp/user/usermanagelist");
-		
-		ArrayList<UserDto> userDto = UserService.UserSelectAll(); 
-		mav.addObject("userDto", userDto);
-		
-		return mav;
+						
+		return ModuleSelectAll();
 	}
 
-	@RequestMapping(value="/modify.html")
-	public ModelAndView UserModify(@ModelAttribute("userDto") UserDto userDto, HttpSession session) throws Exception{
+	@RequestMapping(value="/insert.html") 
+	public ModelAndView UserInsert(UserDto userDto) throws Exception {
 		
-		
-		UserMainDto userMainDto = (UserMainDto) session.getAttribute("userInfo");
+		System.out.println("UserInsert in");
+		/*System.out.println(userDto.getStrName());*/
 		
 		UserModifyDto userModifyDto = new UserModifyDto(
-				StringClass.NewWorkIDCreate(), userMainDto.getStrCode(), 
+				StringClass.NewWorkIDCreate(), userDto.getStrEdit_User_Cd(), 
+				userDto.getStrCode(), userDto.getStrName(), userDto.getStrID(), userDto.getStrPWD(), 
+				userDto.getStrDepart_Cd(), "100", userDto.getStrPosition_Cd(), userDto.getIntLevel(),
+				userDto.getStrCo_Tel1(), userDto.getStrCo_Tel2(), userDto.getStrCo_Tel3(), userDto.getStrCo_Tel_InLine(),
+				userDto.getStrHire_YYYY(), userDto.getStrHire_MM(), userDto.getStrHire_DD(), userDto.getIntVacation_Count(), userDto.getIntUse_Flag(), 
+				userDto.getStrGender(), userDto.getStrBirth_YYYY(), userDto.getStrBirth_MM(), userDto.getStrBirth_DD(), userDto.getIntCalender_Kind(),  
+				userDto.getStrHome_Tel1(), userDto.getStrHome_Tel2(), userDto.getStrHome_Tel3(),  
+				userDto.getStrMobile1(), userDto.getStrMobile2(), userDto.getStrMobile3(),  
+				userDto.getStrZip1(), userDto.getStrZip2(), userDto.getStrAddr1(), userDto.getStrAddr2(), 
+				userDto.getStrHome_Page(), userDto.getIntWedding_Flag(), userDto.getStrWedding_YYYY(), userDto.getStrWedding_MM(), userDto.getStrWedding_DD(), 
+				userDto.getStrHobby(), userDto.getStrResume(), userDto.getStrIntroduction(), "", 
+				"", "", "", "");
+		
+		/*UserService.UserInsert(userDto);*/
+		
+		return ModuleSelectAll();
+	}
+	
+	@RequestMapping(value="/modify.html")
+	public ModelAndView UserModify(UserDto userDto) throws Exception{
+		
+		System.out.println(userDto.getStrCode());
+				
+		UserModifyDto userModifyDto = new UserModifyDto(
+				StringClass.NewWorkIDCreate(), userDto.getStrEdit_User_Cd(), 
 				userDto.getStrCode(), userDto.getStrName(), userDto.getStrID(), userDto.getStrPWD(), 
 				userDto.getStrDepart_Cd(), "100", userDto.getStrPosition_Cd(), userDto.getIntLevel(),
 				userDto.getStrCo_Tel1(), userDto.getStrCo_Tel2(), userDto.getStrCo_Tel3(), userDto.getStrCo_Tel_InLine(),
@@ -81,7 +91,27 @@ public class UserController {
 				userDto.getStrHobby(), userDto.getStrResume(), userDto.getStrIntroduction(), "", 
 				"", "", "", "");
 	
-		UserService.UserModify(userModifyDto);
+		/*UserService.UserModify(userModifyDto);*/
+		
+		return ModuleSelectAll();
+	}
+	
+	@RequestMapping(value="/delete.html")
+	public ModelAndView UserDelete(String strCode) throws Exception {
+		
+		UserService.UserDelete(strCode);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsp/user/usermanagelist");
+		
+		ArrayList<UserDto> userDto = UserService.UserSelectAll(); 
+		mav.addObject("userDto", userDto);
+		
+		return mav;
+	}
+	
+	
+	private ModelAndView ModuleSelectAll() throws Exception{
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("jsp/user/usermanagelist");
@@ -90,13 +120,6 @@ public class UserController {
 		mav.addObject("userDto", userAllDto);
 		
 		return mav;
-	}
-	
-	@RequestMapping(value="/delete.html")
-	public String UserDelete(String code){
-		
-		
-		return "";
 	}
 	
 }

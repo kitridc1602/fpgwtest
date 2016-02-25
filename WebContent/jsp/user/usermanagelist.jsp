@@ -9,7 +9,7 @@
                   <div class="panel-body">
                       <div class="col-md-6 col-sm-12">
                         <h3 class="animated fadeInLeft">${sessionScope.coInfo[6].strName }</h3>
-                        <p class="animated fadeInDown"><span class="fa  fa-map-marker"></span> 메뉴카테고리 들어갈 자리</p>
+                        <p class="animated fadeInDown"><span class="fa  fa-map-marker"></span> 관리자업무 >> 사용자관리</p>
 
                         
                     </div>

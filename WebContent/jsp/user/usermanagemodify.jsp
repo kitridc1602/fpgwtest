@@ -5,7 +5,41 @@
 <html lang="en">
 
 
+<script type="text/javascript">
 
+/* 입력사항 체크 */
+function checkInfomation(kind){
+
+	var resulet = true;
+	
+	return resulet;
+}
+
+
+function userSubmit(kind){
+	
+	if(checkInfomation(kind)){
+		
+		var userModifyForm = document.getElementById('userModify');
+		
+		userModifyForm.method = 'POST';
+		
+		if(kind == 'insert'){
+			
+			userModifyForm.action = '${root }/user/insert.html';
+			
+		} else {
+			
+			userModifyForm.action = '${root }/user/modify.html';
+			
+		}
+		
+		userModifyForm.submit();
+	}
+	
+	
+}
+</script>
 
           <!-- start: content -->
             <div id="content">
@@ -44,7 +78,7 @@
 					<div class="col-md-10">
 						<div class="panel-heading bg-white border-none">
                    			<div class="panel-body">
-                   				<form action="${root }/user/modify.html" method="post">
+                   				<form id="userModify" method="post">
 	                   				<div style="border-bottom: 1px dashed #BDBDBD; margin-bottom: 10px;">
 	                   					<h4>개인정보</h4>
 	                   				</div>
@@ -497,7 +531,18 @@
 									</table>
 									
 									<div style="margin-top: 30px; margin-bottom: 10px; text-align: right;">
-	                   					<input type="submit" class="btn ripple btn-round btn-3d btn-default" style="width: auto; height: auto;" value="수정"/>
+										<c:choose>
+											<c:when test="${!empty userModify.strCode }">
+	                   							<input type="button" id="btnModify" class="btn ripple btn-round btn-3d btn-default" style="width: auto; height: auto;" value="수정" onclick="userSubmit('modify')"/>
+	                   						</c:when>
+	                   						
+	                   						<c:otherwise>
+	                   							<input type="button" id="btnInsert" class="btn ripple btn-round btn-3d btn-default" style="width: auto; height: auto;" value="입력" onclick="userSubmit('insert')"/>
+	                   						</c:otherwise>
+	                   					</c:choose>
+	                   					<input type="button" class="btn ripple btn-round btn-3d btn-default" style="width: auto; height: auto;" value="종료" onclick="location.href='${root}/user/selectall.html'"/>
+	                   					<input type="hidden" id="strGet_User_Cd" name="strGet_User_Cd" value="${sessionScope.userinfo.strCode }">
+	                   					<input type="hidden" id="strEdit_User_Cd" name="strEdit_User_Cd" value="${sessionScope.userinfo.strCode }">
 	                   				</div>
 	                   				
 								</form>

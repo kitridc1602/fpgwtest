@@ -71,6 +71,7 @@
 				LEFT OUTER JOIN CODE_MANAGE CM 		ON 	(UM.UM_POSITION_BCODE = CM.CM_BCODE)
 													AND (UM.UM_POSITION = CM.CM_SCODE)
 		WHERE	(UM_CODE > '00000')
+		AND		(UM_USE_FLAG = 1)
 		ORDER BY UM_CODE   	
 	</select>
 	
@@ -122,7 +123,7 @@
 		UPDATE USER_MAIN
 		SET
 			UM_USE_FLAG = 0
-		WHERE (UM_CODE = '${strCode}')	
+		WHERE (UM_CODE = #{strCode})	
 	</delete>
 	
 	
