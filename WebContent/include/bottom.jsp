@@ -372,6 +372,25 @@
 	</div><!-- /.modal-dialog -->
 </div>
 
+<div class="modal fade" id="showdialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">알림창</h4>
+      </div>
+      <div class="modal-body">
+        <p>저장하시겠습니까?&hellip;</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">종료</button>
+        <button type="button" class="btn btn-primary">저장</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
 <!--end : organization modal -->
 
 <!-- 부서, 조직도 선택시 해당값 처리 Script --> 
