@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kitri.fpgw.dao.FileBeanDto;
 import com.kitri.fpgw.model.UserDto;
 import com.kitri.fpgw.model.UserModifyDto;
 import com.kitri.fpgw.service.UserService;
@@ -48,10 +49,22 @@ public class UserController {
 	}
 
 	@RequestMapping(value="/insert.html") 
-	public ModelAndView UserInsert(UserDto userDto) throws Exception {
+	public ModelAndView UserInsert(UserDto userDto, FileBeanDto fileBean) throws Exception {
 		
-		System.out.println("UserInsert in");
-		/*System.out.println(userDto.getStrName());*/
+		if(fileBean != null){
+			
+			fileBean.getStrFileName();
+		}
+		
+		if(userDto.getStrFace_Name() != ""){
+			
+			userDto.setStrFace_Path("/img/user/");
+		}
+		
+		if(userDto.getStrSign_Name() != ""){
+			
+			userDto.setStrSign_Path("/img/user/");
+		}
 		
 		UserModifyDto userModifyDto = new UserModifyDto(
 				StringClass.NewWorkIDCreate(), userDto.getStrEdit_User_Cd(), 
@@ -65,9 +78,9 @@ public class UserController {
 				userDto.getStrZip1(), userDto.getStrZip2(), userDto.getStrAddr1(), userDto.getStrAddr2(), 
 				userDto.getStrHome_Page(), userDto.getIntWedding_Flag(), userDto.getStrWedding_YYYY(), userDto.getStrWedding_MM(), userDto.getStrWedding_DD(), 
 				userDto.getStrHobby(), userDto.getStrResume(), userDto.getStrIntroduction(), "", 
-				"", "", "", "");
+				"", userDto.getStrFace_Path(), "", userDto.getStrSign_Path());
 		
-		/*UserService.UserInsert(userDto);*/
+		/*UserService.UserInsert(userModifyDto);*/
 		
 		return ModuleSelectAll();
 	}
@@ -75,8 +88,17 @@ public class UserController {
 	@RequestMapping(value="/modify.html")
 	public ModelAndView UserModify(UserDto userDto) throws Exception{
 		
-		System.out.println(userDto.getStrCode());
-				
+		if(userDto.getStrFace_Name() != ""){
+			
+			userDto.setStrFace_Name("U" + userDto.getStrCode() + ".jpg");
+			userDto.setStrFace_Path("/img/user/");
+		}
+		
+		if(userDto.getStrSign_Name() != ""){
+			userDto.setStrSign_Name("S" + userDto.getStrCode() + ".jpg");
+			userDto.setStrSign_Path("/img/user/");
+		}
+		
 		UserModifyDto userModifyDto = new UserModifyDto(
 				StringClass.NewWorkIDCreate(), userDto.getStrEdit_User_Cd(), 
 				userDto.getStrCode(), userDto.getStrName(), userDto.getStrID(), userDto.getStrPWD(), 
@@ -89,7 +111,7 @@ public class UserController {
 				userDto.getStrZip1(), userDto.getStrZip2(), userDto.getStrAddr1(), userDto.getStrAddr2(), 
 				userDto.getStrHome_Page(), userDto.getIntWedding_Flag(), userDto.getStrWedding_YYYY(), userDto.getStrWedding_MM(), userDto.getStrWedding_DD(), 
 				userDto.getStrHobby(), userDto.getStrResume(), userDto.getStrIntroduction(), "", 
-				"", "", "", "");
+				userDto.getStrFace_Name(), userDto.getStrFace_Path(), userDto.getStrSign_Name(), userDto.getStrSign_Path());
 	
 		/*UserService.UserModify(userModifyDto);*/
 		

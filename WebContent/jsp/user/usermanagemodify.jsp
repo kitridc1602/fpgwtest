@@ -22,8 +22,6 @@ function userSubmit(kind){
 		
 		var userModifyForm = document.getElementById('userModify');
 		
-		userModifyForm.method = 'POST';
-		
 		if(kind == 'insert'){
 			
 			userModifyForm.action = '${root }/user/insert.html';
@@ -78,7 +76,7 @@ function userSubmit(kind){
 					<div class="col-md-10">
 						<div class="panel-heading bg-white border-none">
                    			<div class="panel-body">
-                   				<form id="userModify" method="post">
+                   				<form action="${root }/user/insert.html" id="userModify" method="post" enctype="multipart/form-data">
 	                   				<div style="border-bottom: 1px dashed #BDBDBD; margin-bottom: 10px;">
 	                   					<h4>개인정보</h4>
 	                   				</div>
@@ -104,6 +102,7 @@ function userSubmit(kind){
 	                   								<br>
 	                   								<br>
 	                   								<input type="button" class="btn ripple btn-round btn-3d btn-default" style="width: auto; height: auto;" value="사진 추가/수정"/>
+	                   								<input type="file" id="fileBean" name="fileBean"/>
 	                   							</td>
 	                   						</tr>
 	                   						<tr>
@@ -491,7 +490,15 @@ function userSubmit(kind){
 	                   								<h6>총 휴가</h6>
 	                   							</td>
 	                   							<td>
-                   									<input type="text" id="intVacation_Count" name="intVacation_Count"  value="${userModify.intVacation_Count }" style="width: 40%; text-align: right;"><label>일</label>
+	                   								<c:choose>
+	                   									<c:when test="${!empty userModify.intVacation_Count }">
+	                   										<input type="text" id="intVacation_Count" name="intVacation_Count"  value="${userModify.intVacation_Count }" style="width: 40%; text-align: right;"><label>일</label>
+	                   									</c:when>
+	                   									
+	                   									<c:otherwise>
+	                   										<input type="text" id="intVacation_Count" name="intVacation_Count"  value="0" style="width: 40%; text-align: right;"><label>일</label>
+	                   									</c:otherwise>
+	                   								</c:choose>
 	                   							</td>
 	                   						</tr>
 	                   					</tbody>
@@ -541,8 +548,8 @@ function userSubmit(kind){
 	                   						</c:otherwise>
 	                   					</c:choose>
 	                   					<input type="button" class="btn ripple btn-round btn-3d btn-default" style="width: auto; height: auto;" value="종료" onclick="location.href='${root}/user/selectall.html'"/>
-	                   					<input type="hidden" id="strGet_User_Cd" name="strGet_User_Cd" value="${sessionScope.userinfo.strCode }">
-	                   					<input type="hidden" id="strEdit_User_Cd" name="strEdit_User_Cd" value="${sessionScope.userinfo.strCode }">
+	                   					<input type="hidden" id="strGet_User_Cd" name="strGet_User_Cd" value="${sessionScope.userInfo.strCode }">
+	                   					<input type="hidden" id="strEdit_User_Cd" name="strEdit_User_Cd" value="${sessionScope.userInfo.strCode }">
 	                   				</div>
 	                   				
 								</form>

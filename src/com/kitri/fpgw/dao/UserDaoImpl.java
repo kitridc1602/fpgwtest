@@ -33,9 +33,16 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public void UserInsert(UserDto userDto) throws Exception {
+	public void UserInsert(UserModifyDto userModifyDto) throws Exception {
 
-		sqlSessionTemplate.insert("userInsert", userDto);
+		if(sqlSessionTemplate.insert("userModifyTempInsert", userModifyDto) > 0){
+			
+			ProcedureParameterKeyDto procedureParameterKeyDto = new ProcedureParameterKeyDto(userModifyDto.getStrWorkID(), userModifyDto.getStrWork_User());
+			
+			sqlSessionTemplate.insert("userInsert", procedureParameterKeyDto);
+			
+			System.out.println(procedureParameterKeyDto.getStrReturn_Code());
+		}
 	}
 
 	@Override
@@ -43,7 +50,7 @@ public class UserDaoImpl implements UserDao {
 		
 		if(sqlSessionTemplate.insert("userModifyTempInsert", userModifyDto) > 0){
 			
-			ProcedureParameterKeyDto procedureParameterKeyDto = new ProcedureParameterKeyDto(userModifyDto.getStrWorkID(), userModifyDto.getStrWork_User());
+			ProcedureParameterKeyDto procedureParameterKeyDto = new ProcedureParameterKeyDto(userModifyDto.getStrWorkID(), userModifyDto.getStrWork_User());	
 			
 			sqlSessionTemplate.update("userModify", procedureParameterKeyDto);
 		}

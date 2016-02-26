@@ -4,6 +4,7 @@ public class ProcedureParameterKeyDto {
 
 	private String strWork_ID;
 	private String strWork_User;
+	private String strReturn_Code;
 	
 	public ProcedureParameterKeyDto() {
 	}
@@ -28,5 +29,14 @@ public class ProcedureParameterKeyDto {
 	public void setStrWork_User(String strWork_User) {
 		this.strWork_User = strWork_User;
 	}
+
+	public String getStrReturn_Code() {
+		return strReturn_Code;
+	}
+
+	public void setStrReturn_Code(String strReturn_Code) {
+		this.strReturn_Code = strReturn_Code;
+	}
+	
 	
 }

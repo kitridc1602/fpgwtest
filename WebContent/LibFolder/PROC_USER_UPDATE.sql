@@ -1,12 +1,4 @@
-﻿--------------------------------------------------------
---  �뙆�씪�씠 �깮�꽦�맖 - 紐⑹슂�씪-2�썡-25-2016   
---------------------------------------------------------
---------------------------------------------------------
---  DDL for Procedure PROC_USER_UPDATE
---------------------------------------------------------
-set define off;
-
-  CREATE OR REPLACE PROCEDURE "KITRI"."PROC_USER_UPDATE" 
+create or replace PROCEDURE         "PROC_USER_UPDATE" 
 (
   VAR_WORK_ID   IN VARCHAR2,
   VAR_WORK_USER IN VARCHAR2
@@ -141,5 +133,3 @@ COMMIT;
   
 END PROC_USER_UPDATE
 ;
-
-/

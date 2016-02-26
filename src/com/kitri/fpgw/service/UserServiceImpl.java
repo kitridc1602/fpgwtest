@@ -29,9 +29,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void UserInsert(UserDto userDto) throws Exception {
+	public void UserInsert(UserModifyDto userModifyDto) throws Exception {
 
-		userDao.UserInsert(userDto);
+		userDao.UserInsert(userModifyDto);
 	}
 
 	@Override

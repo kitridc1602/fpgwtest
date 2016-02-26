@@ -75,10 +75,6 @@
 		ORDER BY UM_CODE   	
 	</select>
 	
-	<insert id="userInsert" parameterType="com.kitri.fpgw.model.UserDto">
-	
-	</insert>
-	
 	<insert id="userModifyTempInsert" parameterType="com.kitri.fpgw.model.UserModifyDto">
 		INSERT INTO   TEMP_USER
 		  (
@@ -110,6 +106,14 @@
 		  	#{UD_Hobby}, 		#{UD_Resume}, 			#{UD_Introduction}, #{UD_Memo},
 		  	#{UI_Face_Name}, 	#{UI_Face_Path}, 		#{UI_Sign_Name}, 	#{UI_Sign_Path}
 		  )		
+	</insert>
+	
+	<insert id="userInsert" parameterType="com.kitri.fpgw.model.UserModifyDto" statementType="CALLABLE">
+		{
+			CALL PROC_USER_INSERT(#{strWork_ID, mode=IN, jdbcType=VARCHAR, javaType=String}, 
+									#{strWork_User, mode=IN, jdbcType=VARCHAR, javaType=String}, 
+									#{strReturn_Code, mode=OUT, jdbcType=VARCHAR, javaType=String})
+		}
 	</insert>
 	
 	<update id="userModify" parameterType="com.kitri.fpgw.model.ProcedureParameterKeyDto" statementType="CALLABLE">
