@@ -1,13 +1,17 @@
 package com.kitri.fpgw.controller;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kitri.fpgw.dao.FileBeanDto;
 import com.kitri.fpgw.model.UserDto;
 import com.kitri.fpgw.model.UserModifyDto;
 import com.kitri.fpgw.service.UserService;
@@ -49,12 +53,25 @@ public class UserController {
 	}
 
 	@RequestMapping(value="/insert.html") 
-	public ModelAndView UserInsert(UserDto userDto, FileBeanDto fileBean) throws Exception {
-		
-		if(fileBean != null){
+	public ModelAndView UserInsert(UserDto userDto, HttpServletRequest request) throws Exception {
+
+		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
+		Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
+		MultipartFile multipartFile = null;
+		while(iterator.hasNext()){
 			
-			fileBean.getStrFileName();
+			multipartFile = multipartHttpServletRequest.getFile(iterator.next());
+			if(multipartFile.isEmpty() == false){
+				
+				System.out.println("-------------file start-------------");
+				System.out.println("name : " + multipartFile.getName() + " ");
+				System.out.println("filename : " + multipartFile.getOriginalFilename() + " ");
+				System.out.println("size : " + multipartFile.getSize() + " ");
+				System.out.println("-------------file end-------------");
+				
+			}
 		}
+		
 		
 		if(userDto.getStrFace_Name() != ""){
 			

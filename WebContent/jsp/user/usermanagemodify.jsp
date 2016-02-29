@@ -20,19 +20,25 @@ function userSubmit(kind){
 	
 	if(checkInfomation(kind)){
 		
-		var userModifyForm = document.getElementById('userModify');
+		var userModify = document.getElementById('userModify');
+		
+		alert(userModify);
+		alert(userModify.name)
+		alert('kind::::::>>' + kind);
 		
 		if(kind == 'insert'){
 			
-			userModifyForm.action = '${root }/user/insert.html';
+			userModify.action = '${root }/user/insert.html';
 			
 		} else {
 			
-			userModifyForm.action = '${root }/user/modify.html';
+			userModify.action = '${root }/user/modify.html';
 			
 		}
 		
-		userModifyForm.submit();
+		userModify.method = 'POST';
+		userModify.enctype = 'multipart/form-data';
+		userModify.submit();
 	}
 	
 	
@@ -76,7 +82,7 @@ function userSubmit(kind){
 					<div class="col-md-10">
 						<div class="panel-heading bg-white border-none">
                    			<div class="panel-body">
-                   				<form action="${root }/user/insert.html" id="userModify" method="post" enctype="multipart/form-data">
+                   				<form id="userModify" name="userModify">
 	                   				<div style="border-bottom: 1px dashed #BDBDBD; margin-bottom: 10px;">
 	                   					<h4>개인정보</h4>
 	                   				</div>
