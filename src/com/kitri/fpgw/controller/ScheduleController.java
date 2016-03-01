@@ -36,9 +36,9 @@ public class ScheduleController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("jsp/schedule/schedulelist");
-		mav.addObject("menuCategory", "ì¼ì •ê´€ë¦¬ >> ê°œì¸ì¼ì •");
+		mav.addObject("menuCategory", "ÀÏÁ¤°ü¸® >> °³ÀÎÀÏÁ¤");
 		
-		//ì‚¬ìš©ì ì•„ì´ë”” ê°€ì ¸ì˜¤ê¸°
+		//»ç¿ëÀÚ ¾ÆÀÌµğ ºÒ·¯¿À±â
 		UserMainDto userMainDto = (UserMainDto) session.getAttribute("userInfo");
 		System.out.println(userMainDto.getStrCode());
 		return mav;
@@ -49,8 +49,9 @@ public class ScheduleController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("jsp/schedule/schedulelist");
-		mav.addObject("menuCategory", "ì¼ì •ê´€ë¦¬ >> ê³µê°œì¼ì •");
-		//ì‚¬ìš©ì íŒ€ì •ë³´ ê°€ì ¸ì˜¤ê¸°
+		mav.addObject("menuCategory", "ÀÏÁ¤°ü¸® >> °ø°³ÀÏÁ¤");
+		
+		//»ç¿ëÀÚ ÆÀÁ¤º¸ ºÒ·¯¿À±â
 		UserMainDto userMainDto = (UserMainDto) session.getAttribute("userInfo");
 		System.out.println(userMainDto.getStrDepart_Cd());
 		return mav;
