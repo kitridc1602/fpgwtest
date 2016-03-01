@@ -7,43 +7,114 @@
 
 <script type="text/javascript">
 
-/* 입력사항 체크 */
-function checkInfomation(kind){
-
-	var resulet = true;
+	/* 입력사항 체크 */
+	function checkInfomation(kind){
 	
-	return resulet;
-}
-
-
-function userSubmit(kind){
-	
-	if(checkInfomation(kind)){
+		var resulet = true;
 		
-		var userModify = document.getElementById('userModify');
-		
-		alert(userModify);
-		alert(userModify.name)
-		alert('kind::::::>>' + kind);
-		
-		if(kind == 'insert'){
-			
-			userModify.action = '${root }/user/insert.html';
-			
-		} else {
-			
-			userModify.action = '${root }/user/modify.html';
-			
-		}
-		
-		userModify.method = 'POST';
-		userModify.enctype = 'multipart/form-data';
-		userModify.submit();
+		return resulet;
 	}
 	
 	
-}
+	function userSubmit(kind){
+		
+		if(checkInfomation(kind)){
+			
+			var userModify = document.getElementById('userModify');
+			
+			if(kind == 'insert'){
+				
+				userModify.action = '${root }/user/insert.html';
+				
+			} else {
+				
+				userModify.action = '${root }/user/modify.html';
+				
+			}
+			
+			userModify.method = 'POST';
+			userModify.enctype = 'multipart/form-data';
+			userModify.submit();
+		}
+		
+		
+	}
+	
 </script>
+
+<script type="text/javascript">
+
+function readUploadImage( inputObject ) {
+
+/*
+
+브라우저에서 FileReader가 지원되는지
+
+확인하기 위해 
+
+window.File && window.FileReader 
+
+해 본다. 
+
+안되면 안된다고 알려 주면 되지~ ㅋㅋ
+
+*/
+
+	if ( window.File && window.FileReader ) {
+
+		/*
+
+		입력된 파일이 1개 이상 있는지 확인~
+
+		*/
+
+		if ( inputObject.files && inputObject.files[0]) {
+
+
+
+			/* 이미지 파일인지도 체크해 주면 좋지~ */
+
+			if ( !(/image/i).test(inputObject.files[0].type ) ){
+
+				alert("이미지 파일을 선택해 주세요!");
+
+				return false;
+
+			}
+
+			/* FileReader 를 준비 한다. */
+
+			var reader = new FileReader();
+
+			/* input file에 있는 파일 하나를 읽어온다. */
+			reader.readAsDataURL(inputObject.files[0]);
+			
+			reader.onload = function (e) {
+
+				/* reader가 다 읽으면 userImage에 뿌려 주면 끝~  */
+
+				$('#userImage').attr('src', e.target.result);
+
+			}
+
+
+
+			
+
+		}
+
+
+
+	} else {
+
+		alert( "미리보기 안되요.~ 브라우저를 업그레이드하세요~");
+
+	}
+
+}
+
+</script>
+
 
           <!-- start: content -->
             <div id="content">
@@ -104,11 +175,22 @@ function userSubmit(kind){
 	                   								<input type="text" id="strCode" name="strCode" value="${userModify.strCode }" class="form-control" readonly="readonly">
 	                   							</td>
 	                   							<td rowspan="5" align="center" style="width: 20%;">
-	                   								<img alt="" width="180px" height="240px" src="${root }${userModify.strFace_Path }${userModify.strFace_Name }">
+	                   							
+	                   								<c:choose>
+	                   								
+	                   									<c:when test="${userModify.strCode ne null }">
+	                   										<img alt="" id="userImage" name="userImage" width="180px" height="240px" src="${root }${userModify.strFace_Path }${userModify.strFace_Name }">
+	                   									</c:when>
+	                   									
+	                   									<c:otherwise>
+	                   										<img alt="" id="userImage" name="userImage" width="180px" height="240px" style="display: none;">
+	                   									</c:otherwise>
+	                   								</c:choose>
+	                   								
 	                   								<br>
 	                   								<br>
-	                   								<input type="button" class="btn ripple btn-round btn-3d btn-default" style="width: auto; height: auto;" value="사진 추가/수정"/>
-	                   								<input type="file" id="fileBean" name="fileBean"/>
+	                   								<input type="button" class="btn ripple btn-round btn-3d btn-default" style="width: auto; height: auto;" value="사진 추가/수정" onclick="document.getElementById('fileBean').click();"/>
+	                   								<input type="file" id="fileBean" name="fileBean" onchange="readUploadImage(this)"/>
 	                   							</td>
 	                   						</tr>
 	                   						<tr>

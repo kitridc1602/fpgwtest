@@ -55,6 +55,8 @@ public class UserController {
 	@RequestMapping(value="/insert.html") 
 	public ModelAndView UserInsert(UserDto userDto, HttpServletRequest request) throws Exception {
 
+		System.out.println(userDto.getStrName());
+		
 		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
 		Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
 		MultipartFile multipartFile = null;
