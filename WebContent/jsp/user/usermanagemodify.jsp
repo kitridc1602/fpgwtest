@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath }"/>
+<%
+ response.setHeader("Cache-Control","no-cache");
+ response.setHeader("Pragma","no-cache");
+ response.setDateHeader("Expires",0);
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,74 +49,60 @@
 
 <script type="text/javascript">
 
-function readUploadImage( inputObject ) {
-
-/*
-
-브라우저에서 FileReader가 지원되는지
-
-확인하기 위해 
-
-window.File && window.FileReader 
-
-해 본다. 
-
-안되면 안된다고 알려 주면 되지~ ㅋㅋ
-
-*/
-
-	if ( window.File && window.FileReader ) {
-
-		/*
-
-		입력된 파일이 1개 이상 있는지 확인~
-
-		*/
-
-		if ( inputObject.files && inputObject.files[0]) {
-
-
-
-			/* 이미지 파일인지도 체크해 주면 좋지~ */
-
-			if ( !(/image/i).test(inputObject.files[0].type ) ){
-
-				alert("이미지 파일을 선택해 주세요!");
-
-				return false;
-
+	function readUploadImage(inputObject) {
+	
+	/*
+	브라우저에서 FileReader가 지원되는지 확인하기 위해 
+	window.File && window.FileReader 해 본다. 
+	*/
+	
+		if ( window.File && window.FileReader ) {
+	
+			/*
+			입력된 파일이 1개 이상 있는지 확인~
+			*/
+	
+			if ( inputObject.files && inputObject.files[0]) {
+	
+				/* 이미지 파일인지도 체크해 주면 좋지~ */
+	
+				if ( !(/image/i).test(inputObject.files[0].type ) ){
+	
+					alert("이미지 파일을 선택해 주세요!");
+	
+					return false;
+	
+				}
+	
+				/* FileReader 를 준비 한다. */
+	
+				var reader = new FileReader();
+				
+				reader.onload = function (e) {
+	
+					/* reader가 다 읽으면 userImage에 뿌려 주면 끝~  */
+					
+					if(e.target.result != null){
+						
+						$('#userImage').removeAttr("style");
+					}
+					$('#userImage').attr('src', e.target.result);
+	
+				}
+	
+				/* input file에 있는 파일 하나를 읽어온다. */
+				reader.readAsDataURL(inputObject.files[0]);
 			}
-
-			/* FileReader 를 준비 한다. */
-
-			var reader = new FileReader();
-
-			/* input file에 있는 파일 하나를 읽어온다. */
-			reader.readAsDataURL(inputObject.files[0]);
-			
-			reader.onload = function (e) {
-
-				/* reader가 다 읽으면 userImage에 뿌려 주면 끝~  */
-
-				$('#userImage').attr('src', e.target.result);
-
-			}
-
-
-
-			
-
+	
+	
+	
+		} else {
+	
+			alert( "미리보기 안되요.~ 브라우저를 업그레이드하세요~");
+	
 		}
-
-
-
-	} else {
-
-		alert( "미리보기 안되요.~ 브라우저를 업그레이드하세요~");
-
+	
 	}
-
-}
 
 </script>
 
@@ -190,7 +181,7 @@ window.File && window.FileReader
 	                   								<br>
 	                   								<br>
 	                   								<input type="button" class="btn ripple btn-round btn-3d btn-default" style="width: auto; height: auto;" value="사진 추가/수정" onclick="document.getElementById('fileBean').click();"/>
-	                   								<input type="file" id="fileBean" name="fileBean" onchange="readUploadImage(this)"/>
+	                   								<input type="file" id="fileBean" name="fileBean" onchange="readUploadImage(this)" style="display: none;"/>
 	                   							</td>
 	                   						</tr>
 	                   						<tr>
@@ -241,7 +232,7 @@ window.File && window.FileReader
 	                   							</td>
 	                   							<td colspan="3">
 	                   								<select style="width: 100px;" id="strBirth_YYYY" name="strBirth_YYYY">
-		                                    			<option>선택</option>
+		                                    			<option value="">선택</option>
 		                                    				<c:forEach var="year" begin="1900" end="2100" step="1">
 		                                    					<c:choose>
 		                                    						<c:when test="${year eq userModify.strBirth_YYYY }">
@@ -256,7 +247,7 @@ window.File && window.FileReader
 		                                  			</select>
 		                                  			년
 		                                  			<select style="width: 100px;" id="strBirth_MM" name="strBirth_MM">
-		                                    			<option>선택</option>
+		                                    			<option value="">선택</option>
 		                                    				<c:forEach var="month" begin="1" end="12" step="1">
 		                                    					<c:if test="${month < 10 }">
 		                                    						<c:set var="month" value="0${month }"/>
@@ -275,7 +266,7 @@ window.File && window.FileReader
 		                                  			</select>
 		                                  			월
 		                                  			<select style="width: 100px;" id="strBirth_DD" name="strBirth_DD">
-		                                    			<option>선택</option>
+		                                    			<option value="">선택</option>
 		                                    				<c:forEach var="date" begin="1" end="31" step="1">
 		                                    					<c:if test="${date < 10 }">
 		                                    						<c:set var="date" value="0${date }"/>
@@ -374,7 +365,7 @@ window.File && window.FileReader
 	                   								</c:choose>
 	                   								&nbsp;&nbsp;기혼&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(결혼 기념일 : 
 			                              				<select style="width: 100px;" id="strWedding_YYYY" name="strWedding_YYYY">
-			                                    			<option>선택</option>
+			                                    			<option value="">선택</option>
 			                                    				<c:forEach var="year" begin="1900" end="2100" step="1">
 			                                    					<c:choose>
 			                                    						<c:when test="${year eq userModify.strWedding_YYYY }">
@@ -389,7 +380,7 @@ window.File && window.FileReader
 			                                  			</select>
 			                                  			년
 			                                  			<select style="width: 100px;" id="strWedding_MM" name="strWedding_MM">
-			                                    			<option>선택</option>
+			                                    			<option value="">선택</option>
 			                                    				<c:forEach var="month" begin="1" end="12" step="1">
 			                                    					<c:if test="${month < 10 }">
 			                                    						<c:set var="month" value="0${month }"/>
@@ -408,7 +399,7 @@ window.File && window.FileReader
 			                                  			</select>
 			                                  			월
 			                                  			<select style="width: 100px;" id="strWedding_DD" name="strWedding_DD">
-			                                    			<option>선택</option>
+			                                    			<option value="">선택</option>
 			                                    				<c:forEach var="date" begin="1" end="31" step="1">
 			                                    					<c:if test="${date < 10 }">
 			                                    						<c:set var="date" value="0${date }"/>
@@ -521,7 +512,7 @@ window.File && window.FileReader
 	                   							</td>
 	                   							<td colspan="3">
 	                   								<select style="width: 100px;" id="strHire_YYYY" name="strHire_YYYY">
-		                                    			<option>선택</option>
+		                                    			<option value="">선택</option>
 		                                    				<c:forEach var="year" begin="1900" end="2100" step="1">
 		                                    					<c:choose>
 		                                    						<c:when test="${year eq userModify.strHire_YYYY }">
@@ -536,7 +527,7 @@ window.File && window.FileReader
 		                                  			</select>
 		                                  			년
 		                                  			<select style="width: 100px;" id="strHire_MM" name="strHire_MM">
-		                                    			<option>선택</option>
+		                                    			<option value="">선택</option>
 		                                    				<c:forEach var="month" begin="1" end="12" step="1">
 		                                    					<c:if test="${month < 10 }">
 		                                    						<c:set var="month" value="0${month }"/>
@@ -555,7 +546,7 @@ window.File && window.FileReader
 		                                  			</select>
 		                                  			월
 		                                  			<select style="width: 100px;" id="strHire_DD" name="strHire_DD">
-		                                    			<option>선택</option>
+		                                    			<option value="">선택</option>
 		                                    				<c:forEach var="date" begin="1" end="31" step="1">
 		                                    					<c:if test="${date < 10 }">
 		                                    						<c:set var="date" value="0${date }"/>

@@ -1,15 +1,12 @@
 package com.kitri.fpgw.controller;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kitri.fpgw.model.UserDto;
@@ -54,36 +51,8 @@ public class UserController {
 
 	@RequestMapping(value="/insert.html") 
 	public ModelAndView UserInsert(UserDto userDto, HttpServletRequest request) throws Exception {
-
-		System.out.println(userDto.getStrName());
-		
-		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
-		Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
-		MultipartFile multipartFile = null;
-		while(iterator.hasNext()){
-			
-			multipartFile = multipartHttpServletRequest.getFile(iterator.next());
-			if(multipartFile.isEmpty() == false){
-				
-				System.out.println("-------------file start-------------");
-				System.out.println("name : " + multipartFile.getName() + " ");
-				System.out.println("filename : " + multipartFile.getOriginalFilename() + " ");
-				System.out.println("size : " + multipartFile.getSize() + " ");
-				System.out.println("-------------file end-------------");
-				
-			}
-		}
-		
-		
-		if(userDto.getStrFace_Name() != ""){
-			
-			userDto.setStrFace_Path("/img/user/");
-		}
-		
-		if(userDto.getStrSign_Name() != ""){
-			
-			userDto.setStrSign_Path("/img/user/");
-		}
+	
+		System.out.println(userDto.getStrEdit_User_Cd());
 		
 		UserModifyDto userModifyDto = new UserModifyDto(
 				StringClass.NewWorkIDCreate(), userDto.getStrEdit_User_Cd(), 
@@ -97,26 +66,15 @@ public class UserController {
 				userDto.getStrZip1(), userDto.getStrZip2(), userDto.getStrAddr1(), userDto.getStrAddr2(), 
 				userDto.getStrHome_Page(), userDto.getIntWedding_Flag(), userDto.getStrWedding_YYYY(), userDto.getStrWedding_MM(), userDto.getStrWedding_DD(), 
 				userDto.getStrHobby(), userDto.getStrResume(), userDto.getStrIntroduction(), "", 
-				"", userDto.getStrFace_Path(), "", userDto.getStrSign_Path());
+				"", "", "", "");
 		
-		/*UserService.UserInsert(userModifyDto);*/
+		UserService.UserInsert(userModifyDto, request);
 		
 		return ModuleSelectAll();
 	}
 	
 	@RequestMapping(value="/modify.html")
-	public ModelAndView UserModify(UserDto userDto) throws Exception{
-		
-		if(userDto.getStrFace_Name() != ""){
-			
-			userDto.setStrFace_Name("U" + userDto.getStrCode() + ".jpg");
-			userDto.setStrFace_Path("/img/user/");
-		}
-		
-		if(userDto.getStrSign_Name() != ""){
-			userDto.setStrSign_Name("S" + userDto.getStrCode() + ".jpg");
-			userDto.setStrSign_Path("/img/user/");
-		}
+	public ModelAndView UserModify(UserDto userDto, HttpServletRequest request) throws Exception{
 		
 		UserModifyDto userModifyDto = new UserModifyDto(
 				StringClass.NewWorkIDCreate(), userDto.getStrEdit_User_Cd(), 
@@ -130,9 +88,9 @@ public class UserController {
 				userDto.getStrZip1(), userDto.getStrZip2(), userDto.getStrAddr1(), userDto.getStrAddr2(), 
 				userDto.getStrHome_Page(), userDto.getIntWedding_Flag(), userDto.getStrWedding_YYYY(), userDto.getStrWedding_MM(), userDto.getStrWedding_DD(), 
 				userDto.getStrHobby(), userDto.getStrResume(), userDto.getStrIntroduction(), "", 
-				userDto.getStrFace_Name(), userDto.getStrFace_Path(), userDto.getStrSign_Name(), userDto.getStrSign_Path());
+				"", "", "", "");
 	
-		/*UserService.UserModify(userModifyDto);*/
+		UserService.UserModify(userModifyDto, request);
 		
 		return ModuleSelectAll();
 	}
@@ -141,14 +99,8 @@ public class UserController {
 	public ModelAndView UserDelete(String strCode) throws Exception {
 		
 		UserService.UserDelete(strCode);
-		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("jsp/user/usermanagelist");
-		
-		ArrayList<UserDto> userDto = UserService.UserSelectAll(); 
-		mav.addObject("userDto", userDto);
-		
-		return mav;
+				
+		return ModuleSelectAll();
 	}
 	
 	

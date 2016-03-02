@@ -130,7 +130,25 @@
 		WHERE (UM_CODE = #{strCode})	
 	</delete>
 	
+	<select id="userImageSelect" parameterType="String" resultType="com.kitri.fpgw.model.UserImageDto">
+		SELECT  UI_UM_CODE STRCODE,
+		        UI_FACE_NAME STRFACE_NAME,  UI_FACE_PATH STRFACE_PATH,
+		        UI_SIGN_NAME STRSIGN_NAME,  UI_SIGN_PATH STRSIGN_PATH
+		FROM    USER_IMAGE
+		WHERE   (UI_UM_CODE = #{strCode})	
+	</select>
 	
+	<update id="userImageModify" parameterType="com.kitri.fpgw.model.UserImageDto">
+		UPDATE USER_IMAGE
+		SET
+		    UI_FACE_NAME = #{strFace_Name},
+		    UI_FACE_PATH = #{strFace_Path},
+		    <!-- UI_SIGN_NAME = #{strSign_Name},
+		    UI_SIGN_PATH = #{strSign_Path}, -->
+		    UI_GET_USER = #{strGet_User_Cd},
+		    UI_GET_DATE = SYSDATE
+		WHERE (UI_UM_CODE = #{strCode})
+	</update>
 	
 	
 	

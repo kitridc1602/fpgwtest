@@ -66,14 +66,14 @@
 	                   							<td style="width: 10%; text-align: center;" rowspan="3">일자</td>
 	                   							<td colspan="3">
 	                   								&nbsp;&nbsp;
-		                   							<c:forEach var="workKind" items="">
+		                   							<c:forEach var="workKind" items="${sessionScope.workKind }">
 		                   								<c:choose>
-		                   									<c:when test="">
-		                   										<input type="radio" id="strWork_Kind_Cd" name="strWork_Kind_Cd" value="">&nbsp;&nbsp;&nbsp;
+		                   									<c:when test="${workKind.strSCode eq strSch_Kind_Cd }">
+		                   										<input type="radio" id="strWork_Kind_Cd" name="strWork_Kind_Cd" value="${workKind.strSCode }" checked="checked">${workKind.strName }&nbsp;&nbsp;&nbsp;
 		                   									</c:when>
 		                   								
 		                   									<c:otherwise>
-		                   										<input type="radio" id="strWork_Kind_Cd" name="strWork_Kind_Cd" value="">&nbsp;&nbsp;&nbsp;	
+		                   										<input type="radio" id="strWork_Kind_Cd" name="strWork_Kind_Cd" value="${workKind.strSCode }">${workKind.strName }&nbsp;&nbsp;&nbsp;	
 		                   									</c:otherwise>
 		                   								</c:choose>
 		                   							</c:forEach>
@@ -173,7 +173,7 @@
 	                   						<tr>
                    								<td style="width: 10%; text-align: center;">종류</td>
 	                   							<td>
-	                   								<select style="width: 100%;" id="strWork_Kind_cd" name="strWork_Kind_cd">
+	                   								<select style="width: 50%;" id="strWork_Kind_cd" name="strWork_Kind_cd">
 		                                    			<option>선택</option>
 		                                    				<c:forEach var="workKind" items="${sessionScope.schKind }">
 		                                    					
@@ -189,9 +189,9 @@
 		                                    				</c:forEach>
 		                                  			</select>
 	                   							</td>
-	                   							<td style="width: 40%; text-align: center;">공개여부</td>
+	                   							<td style="width: 15%; text-align: center;">공개여부</td>
 	                   							<td>
-	                   								<select style="width: 100%;" id="strDisclosure_Cd" name="strDisclosure_Cd">
+	                   								<select style="width: 30%;" id="strDisclosure_Cd" name="strDisclosure_Cd">
 	                                    				<c:forEach var="disclosure" items="${sessionScope.disclosure }">
 	                                    					
 	                                    					<c:choose>

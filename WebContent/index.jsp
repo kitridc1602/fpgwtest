@@ -12,7 +12,7 @@
 
 	<div>
 		<div style="width: 350px; margin-top: 200px; margin-left: auto; margin-right: auto;">
-			<form id="userDto" action="${root }/main/login.html" method="post">
+			<form action="${root }/main/login.html" method="post">
 				<table>
 					<tr>
 						<td colspan="3">
@@ -22,7 +22,7 @@
 					<tr>
 						<td align="right">아이디</td>
 						<td>
-							<input type="text" id="id" name="id" value="kitri12">
+							<input type="text" id="id" name="id" value="kitri01">
 						</td>
 						<td rowspan="2">
 							<input type="submit" id="btnlogin" name="btnlogin" value="로그인" style="height: 50px;">

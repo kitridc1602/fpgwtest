@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kitri.fpgw.model.ProcedureParameterKeyDto;
-import com.kitri.fpgw.model.UserBFModifyDto;
 import com.kitri.fpgw.model.UserDto;
+import com.kitri.fpgw.model.UserImageDto;
 import com.kitri.fpgw.model.UserModifyDto;
 
 @Repository
@@ -33,16 +33,18 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public void UserInsert(UserModifyDto userModifyDto) throws Exception {
+	public String UserInsert(UserModifyDto userModifyDto) throws Exception {
 
+		ProcedureParameterKeyDto procedureParameterKeyDto = new ProcedureParameterKeyDto(userModifyDto.getStrWorkID(), userModifyDto.getStrWork_User());
+		
 		if(sqlSessionTemplate.insert("userModifyTempInsert", userModifyDto) > 0){
-			
-			ProcedureParameterKeyDto procedureParameterKeyDto = new ProcedureParameterKeyDto(userModifyDto.getStrWorkID(), userModifyDto.getStrWork_User());
 			
 			sqlSessionTemplate.insert("userInsert", procedureParameterKeyDto);
 			
 			System.out.println(procedureParameterKeyDto.getStrReturn_Code());
 		}
+		
+		return procedureParameterKeyDto.getStrReturn_Code();
 	}
 
 	@Override
@@ -62,4 +64,17 @@ public class UserDaoImpl implements UserDao {
 		sqlSessionTemplate.delete("userDelete", strCode);
 	}
 
+	@Override
+	public UserImageDto UserImageSelect(String strCode) throws Exception {
+
+		return (UserImageDto) sqlSessionTemplate.selectOne("userImageSelect", strCode);
+	}
+
+	@Override
+	public void UserImageModify(UserImageDto userImageDto) throws Exception {
+
+		sqlSessionTemplate.update("userImageModify", userImageDto);
+	}
+
+	
 }

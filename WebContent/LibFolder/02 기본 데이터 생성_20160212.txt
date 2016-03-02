@@ -337,20 +337,11 @@ INSERT INTO CODE_MANAGE
 (
 	CM_BCODE, CM_SCODE, CM_BNAME, CM_NAME, CM_VALUE4, CM_SORT, CM_USE_FLAG
 )
-SELECT '301', '001', '일정구분', '회사일정', 'workKind', 1, 1 FROM DUAL
+SELECT '301', '001', '일정구분', '일일', 'workKind', 1, 1 FROM DUAL
 
 	UNION ALL
 	
-SELECT '301', '002', '일정구분', '부서일정', 'workKind', 2, 1 FROM DUAL
-
-	UNION ALL
-	
-SELECT '301', '003', '일정구분', '팀일정', 'workKind', 3, 1 FROM DUAL
-
-	UNION ALL
-	
-SELECT '301', '004', '일정구분', '개인일정', 'workKind', 4, 1 FROM DUAL
-
+SELECT '301', '002', '일정구분', '시간', 'workKind', 2, 1 FROM DUAL
 
 ;
 

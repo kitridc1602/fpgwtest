@@ -41,12 +41,8 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="/login.html")
-	public String Login(String id, String pwd, HttpSession session) {
-			
-		String strMovePage = "";
-		
-		try{
-			
+	public String Login(String id, String pwd, HttpSession session) throws Exception {
+				
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		Date date = new Date();
 		String ymd = sdf.format(date);
@@ -57,7 +53,7 @@ public class MainController {
 				
 		UserMainDto userOut = MainService.LogIn(userIn);
 		
-		/*String strMovePage = "";*/
+		String strMovePage = "";
 		
 		if(userOut == null){
 			
@@ -117,10 +113,7 @@ public class MainController {
 			
 			strMovePage = "jsp/main/default";
 		}
-		} catch (Exception ex){
-			
-			System.out.println(ex.getMessage());
-		}
+		
 		return strMovePage;
 	}
 	
