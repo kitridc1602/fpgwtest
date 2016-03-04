@@ -3,6 +3,57 @@
 <c:set var="root" value="${pageContext.request.contextPath }"/>
 <!DOCTYPE html>
 <html lang="en">
+
+<script src="asset/js/main.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+		$('.date').bootstrapMaterialDatePicker({ 
+				weekStart : 0, 
+				time: false
+			});
+		
+		$('.date').bootstrapMaterialDatePicker().on('change', function(e, date){
+			
+			document.getElementById("strYY").value = date.format('YYYY');
+			document.getElementById("strMM").value = date.format('MM');
+			document.getElementById("strDD").value = date.format('DD');
+						
+		});
+		
+	});
+	  
+	  
+</script>
+
+<script type="text/javascript">
+
+	function scheduleSubmit(kind){
+		
+		var scheduleModify = document.getElementById("scheduleModify");
+		
+		switch(kind){
+		
+			case 'insert':
+				scheduleModify.action = '${root }/schedule/insert.html';
+				break;
+				
+			case 'modify':
+				scheduleModify.action = '${root }/schedule/modify.html';
+				break;
+				
+			case 'delete':
+				scheduleModify.action = '${root }/schedule/delete.html';
+				break;
+		}	
+		
+		scheduleModify.method = 'POST';
+		scheduleModify.submit();
+		
+		
+	}
+	
+</script>
           <!-- start: content -->
             <div id="content">
                 <div class="panel">
@@ -46,7 +97,7 @@
 					<div class="col-md-1"></div>
 					<div class="col-md-10">
 						<div class="panel-heading bg-white border-none">
-							<form>
+							<form id="scheduleModify">
 	                   			<div class="panel-body">
 	                   				<table style="width: 100%;">
 	                   					<tbody>
@@ -69,11 +120,11 @@
 		                   							<c:forEach var="workKind" items="${sessionScope.workKind }">
 		                   								<c:choose>
 		                   									<c:when test="${workKind.strSCode eq strSch_Kind_Cd }">
-		                   										<input type="radio" id="strWork_Kind_Cd" name="strWork_Kind_Cd" value="${workKind.strSCode }" checked="checked">${workKind.strName }&nbsp;&nbsp;&nbsp;
+		                   										<input type="radio" id="strSch_Kind_Cd" name="strSch_Kind_Cd" value="${workKind.strSCode }" checked="checked">${workKind.strName }&nbsp;&nbsp;&nbsp;
 		                   									</c:when>
 		                   								
 		                   									<c:otherwise>
-		                   										<input type="radio" id="strWork_Kind_Cd" name="strWork_Kind_Cd" value="${workKind.strSCode }">${workKind.strName }&nbsp;&nbsp;&nbsp;	
+		                   										<input type="radio" id="strSch_Kind_Cd" name="strSch_Kind_Cd" value="${workKind.strSCode }">${workKind.strName }&nbsp;&nbsp;&nbsp;	
 		                   									</c:otherwise>
 		                   								</c:choose>
 		                   							</c:forEach>
@@ -173,8 +224,8 @@
 	                   						<tr>
                    								<td style="width: 10%; text-align: center;">종류</td>
 	                   							<td>
-	                   								<select style="width: 50%;" id="strWork_Kind_cd" name="strWork_Kind_cd">
-		                                    			<option>선택</option>
+	                   								<select style="width: 50%;" id="strWork_Kind_Cd" name="strWork_Kind_Cd">
+		                                    			<option value="000" selected="selected">선택</option>
 		                                    				<c:forEach var="workKind" items="${sessionScope.schKind }">
 		                                    					
 		                                    					<c:choose>
@@ -214,7 +265,7 @@
 	                   				<div style="margin-top: 30px; margin-bottom: 10px; text-align: right;">
 										<c:choose>
 											<c:when test="${!empty schedule.strUser }">
-												<input type="button" id="btnDelete" class="btn ripple btn-round btn-3d btn-default" style="width: auto; height: auto;" value="수정" onclick="scheduleSubmit('delete')"/>
+												<input type="button" id="btnDelete" class="btn ripple btn-round btn-3d btn-default" style="width: auto; height: auto;" value="삭제" onclick="scheduleSubmit('delete')"/>
 	               								<input type="button" id="btnModify" class="btn ripple btn-round btn-3d btn-default" style="width: auto; height: auto;" value="수정" onclick="scheduleSubmit('modify')"/>
 	                  						</c:when>
 		                  						
@@ -222,7 +273,8 @@
 	                  							<input type="button" id="btnInsert" class="btn ripple btn-round btn-3d btn-default" style="width: auto; height: auto;" value="입력" onclick="scheduleSubmit('insert')"/>
 	                  						</c:otherwise>
 	                  					</c:choose>
-	                   					<input type="button" class="btn ripple btn-round btn-3d btn-default" style="width: auto; height: auto;" value="종료" onclick="location.href='${root}/user/selectall.html'"/>
+	                   					<input type="button" class="btn ripple btn-round btn-3d btn-default" style="width: auto; height: auto;" value="종료" onclick="location.href='${root}/user/privateselect.html'"/>
+	                   					<input type="hidden" id="strUser" name="strUser" value="${sessionScope.userInfo.strCode }">
 	                   					<input type="hidden" id="strGet_User_Cd" name="strGet_User_Cd" value="${sessionScope.userInfo.strCode }">
 	                   					<input type="hidden" id="strEdit_User_Cd" name="strEdit_User_Cd" value="${sessionScope.userInfo.strCode }">
 	                   				</div>

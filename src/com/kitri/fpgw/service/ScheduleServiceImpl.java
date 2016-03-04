@@ -22,14 +22,14 @@ public class ScheduleServiceImpl implements ScheduleService {
 
 	@Override
 	public ArrayList<ScheduleDto> ScheduleSelectAll(ScheduleDto scheduleDto) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	
+		return scheduleDao.ScheduleSelectAll(scheduleDto);
 	}
 
 	@Override
 	public void ScheduleInsert(ScheduleDto scheduleDto) throws Exception {
-		// TODO Auto-generated method stub
 
+		scheduleDao.ScheduleInsert(scheduleDto);
 	}
 
 	@Override

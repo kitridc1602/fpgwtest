@@ -1,6 +1,7 @@
 package com.kitri.fpgw.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +23,16 @@ public class ScheduleDaoImpl implements ScheduleDao {
 
 	@Override
 	public ArrayList<ScheduleDto> ScheduleSelectAll(ScheduleDto scheduleDto) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<ScheduleDto> list = sqlSessionTemplate.selectList("ScheduleSelectAll", scheduleDto);
+		
+		return (ArrayList<ScheduleDto>) list;
 	}
 
 	@Override
 	public void ScheduleInsert(ScheduleDto scheduleDto) throws Exception {
-		// TODO Auto-generated method stub
-
+		
+		sqlSessionTemplate.insert("ScheduleInsert", scheduleDto);
 	}
 
 	@Override

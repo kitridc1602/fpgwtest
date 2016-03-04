@@ -30,6 +30,10 @@ public class ScheduleDto {
 	private String strEdit_User_Nm;
 	private Date datEdit_Date;
 	
+	private String strSearchStartDate;
+	private String strSearchEndDate;
+	
+	
 	public ScheduleDto() {
 
 	}
@@ -39,7 +43,8 @@ public class ScheduleDto {
 			String strEnd_Minute, String strTerm_Hour, String strTerm_Minute, String strSch_Kind_Cd,
 			String strSch_Kind_Nm, String strWork_Kind_Cd, String strWork_Kind_Nm, String strDisclosure_Cd,
 			String strDisclosure_Nm, String strGet_User_Cd, String strGet_User_Nm, Date datGet_Date,
-			String strEdit_User_Cd, String strEdit_User_Nm, Date datEdit_Date) {
+			String strEdit_User_Cd, String strEdit_User_Nm, Date datEdit_Date, String strSearchStartDate,
+			String strSearchEndDate) {
 		this.strUser = strUser;
 		this.strYY = strYY;
 		this.strMM = strMM;
@@ -65,6 +70,8 @@ public class ScheduleDto {
 		this.strEdit_User_Cd = strEdit_User_Cd;
 		this.strEdit_User_Nm = strEdit_User_Nm;
 		this.datEdit_Date = datEdit_Date;
+		this.strSearchStartDate = strSearchStartDate;
+		this.strSearchEndDate = strSearchEndDate;
 	}
 
 	public String getStrUser() {
@@ -265,6 +272,22 @@ public class ScheduleDto {
 
 	public void setDatEdit_Date(Date datEdit_Date) {
 		this.datEdit_Date = datEdit_Date;
+	}
+
+	public String getStrSearchStartDate() {
+		return strSearchStartDate;
+	}
+
+	public void setStrSearchStartDate(String strSearchStartDate) {
+		this.strSearchStartDate = strSearchStartDate;
+	}
+
+	public String getStrSearchEndDate() {
+		return strSearchEndDate;
+	}
+
+	public void setStrSearchEndDate(String strSearchEndDate) {
+		this.strSearchEndDate = strSearchEndDate;
 	}
 	
 	

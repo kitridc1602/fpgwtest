@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath }"/>
+
 <!DOCTYPE html>
 <html lang="en">
           <!-- start: content -->
@@ -170,88 +171,33 @@
                             	<h4><span class="icons icon-paper-clip"></span> 오늘의 일정</h4>
                             </div>
 	                      <ul class="mini-timeline">
-	
-	                        <li class="mini-timeline-highlight">
-	                           <div class="mini-timeline-panel">
-	                            <h5 class="time">05:00</h5>
-	                            <p>Make tea</p>
-	                          </div>
-	                        </li>
-	
-	                        <li class="mini-timeline-highlight">
-	                          <div class="mini-timeline-panel">
-	                            <h5 class="time">06:00</h5>
-	                            <p>Go to market</p>
-	                          </div>
-	                        </li>
-	
-	                        <li class="mini-timeline-highlight">
-	                         <div class="mini-timeline-panel">
-	                            <h5 class="time">07:00</h5>
-	                            <p>Coding!!</p>
-	                          </div>
-	                        </li>
-	
-	                        <li class="mini-timeline-highlight">
-	                           <div class="mini-timeline-panel">
-	                            <h5 class="time">09:00</h5>
-	                            <p>Playing The Games</p>
-	                          </div>
-	                        </li>
-	                        <li class="mini-timeline-highlight">
-	                           <div class="mini-timeline-panel">
-	                            <h5 class="time">12:00</h5>
-	                            <p>Meeting with <a href="#">Clients</a></p>
-	                          </div>
-	                        </li>
-	                        <li class="mini-timeline-highlight mini-timeline-warning">
-	                          <div class="mini-timeline-panel">
-	                            <h5 class="time">15:00</h5>
-	                            <p>Breakdown the Personal PC</p>
-	                          </div>
-	                        </li>
-	                        <li class="mini-timeline-highlight mini-timeline-info">
-	                          <div class="mini-timeline-panel">
-	                            <h5 class="time">15:00</h5>
-	                            <p>Checking Server!</p>
-	                          </div>
-	                        </li>
-	                        <li class="mini-timeline-highlight mini-timeline-success">
-	                          <div class="mini-timeline-panel">
-	                            <h5 class="time">16:01</h5>
-	                            <p>Hacking The public wifi</p>
-	                          </div>
-	                        </li>
-	                        <li class="mini-timeline-highlight mini-timeline-danger">
-	                          <div class="mini-timeline-panel">
-	                            <h5 class="time">21:00</h5>
-	                            <p>Sleep!</p>
-	                          </div>
-	                        </li>
-	                        <li class="mini-timeline-highlight mini-timeline-danger">
-	                          <div class="mini-timeline-panel">
-	                            <h5 class="time">22:00</h5>
-	                            <p>Sleep!</p>
-	                          </div>
-	                        </li>
-	                        <li class="mini-timeline-highlight mini-timeline-danger">
-	                          <div class="mini-timeline-panel">
-	                            <h5 class="time">23:00</h5>
-	                            <p>Sleep!</p>
-	                          </div>
-	                        </li>
-	                        <li class="mini-timeline-highlight mini-timeline-danger">
-	                          <div class="mini-timeline-panel">
-	                            <h5 class="time">24:00</h5>
-	                            <p>Sleep!</p>
-	                          </div>
-	                        </li>
-	                        <li class="mini-timeline-highlight mini-timeline-danger">
-	                          <div class="mini-timeline-panel">
-	                            <h5 class="time">01:00</h5>
-	                            <p>Sleep!</p>
-	                          </div>
-	                        </li>
+
+	                      	<c:forEach var="schedule" items="${ToDaySchedule }">
+	                      		<c:choose>
+	                      			<c:when test="${schedule.strSch_Kind_Cd eq '001' }">
+	                      				<li class="mini-timeline-highlight">
+	                      			</c:when>
+	                      		
+	                      			<c:otherwise>
+	                      				<li class="mini-timeline-highlight mini-timeline-info">
+	                      			</c:otherwise>
+	                      		</c:choose>
+	                      		
+		                      		<div class="mini-timeline-panel">
+		                      			<c:choose>
+		                      				<c:when test="${schedule.strStart_Hour eq 00}">
+		                      					<h5 class="time">일일</h5>
+		                      				</c:when>
+		                      				
+		                      				<c:otherwise>
+		                      					<h5 class="time">${schedule.strStart_Hour }:${schedule.strStart_Minute }</h5>		
+		                      				</c:otherwise>
+		                      			</c:choose>
+		                            
+		                            <p>${schedule.strTitle }</p>
+		                          </div>
+		                        </li>
+	                      	</c:forEach>
 	                      </ul>
 	                    </div>
 	                  </div>            
@@ -267,7 +213,7 @@
 	                        	<h4><span class="icons icon-calendar"></span> 일정관리</h4>
 	                        </div>
 	                        <div class="panel-body padding-0">
-	                        	<div class="calendar"></div>
+	                        	<div id='calendar' class="calendar"></div>
 	               			</div>
 	                	</div>
                  	</div>	                

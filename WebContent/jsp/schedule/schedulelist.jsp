@@ -3,52 +3,66 @@
 <c:set var="root" value="${pageContext.request.contextPath }"/>
 <!DOCTYPE html>
 <html lang="en">
-		<!-- start: Javascript -->
-		<script src='${root}/js/lang/ko.js'></script>
-		<script src="${root }/js/main.js" ></script>
-		<script type="text/javascript">
-		  
-		$(document).ready(function(){
-		        
-			$('#external-events .fc-event').each(function() {
-		        // store data so the calendar knows to render an event upon drop
-		        $(this).data('event', {
-		          title: $.trim($(this).text()), // use the element's text as the event title
-		          stick: true // maintain when user navigates (see docs on the renderEvent method)
-		        });
-		
-		       /*  // make the event draggable using jQuery UI
-		        $(this).draggable({
-		          zIndex: 999,
-		          revert: true,      // will cause the event to go back to its
-		          revertDuration: 0  //  original position after the drag
-		        }); */
-		
-		      });
-		
-		
-		      $('#calendar').fullCalendar({
-		    	  
-		    	  lang: 'ko',
-			      header: {
-			        left: 'prev,next today',
-			        center: 'title',
-			        right: 'month,agendaWeek,agendaDay'
-			      },
-			      editable: true,
-			      droppable: true, // this allows things to be dropped onto the calendar
-			      drop: function(date, jsEvent, ui ) {
-			
-			        // is the "remove after drop" checkbox checked?
-			        if ($('#drop-remove').is(':checked')) {
-			          // if so, remove the element from the "Draggable Events" list
-			          $(this).remove();
-			        }
-			      }
-		    });
-		  });
-		</script>
-		<!-- end: Javascript -->
+
+<!-- start: Javascript -->
+<script src='${root}/js/lang/ko.js'></script>
+<script src="${root }/js/main.js" ></script>
+<script src="${root }/js/plugins/gcal.js" ></script>
+<script type="text/javascript">
+  
+$(document).ready(function(){
+	
+      $('#calendar').fullCalendar({
+    	  
+    	  lang: 'ko',
+	      header: {
+	        left: 'prev,next today',
+	        center: 'title',
+	        right: 'month,agendaWeek,agendaDay'
+	      },
+	      editable: false,
+	      droppable: false,
+	      eventLimit: true,
+
+	      events : function(start, end, timezone, callback){
+	    	  
+	    	  $.ajax({
+	    		
+	    		  url: '${root}/schedule/calenderview.html',
+	    		  dataType: 'json',
+	    		  data: {
+	    			  start: start.format('YYYYMMDD'),
+	    			  end: end.format('YYYYMMDD')
+	    		  },
+	    		  success:function(data){
+	    			  
+	    			  var len = data.event.length;
+	    			  var events = [];
+	    			  
+	    			  for(i = 0; i < len; i++){
+	    				  
+	    				  events.push({
+	    					  
+	    					  id: data.event[i].id,
+	    					  allDay: Boolean(Number(data.event[i].allDay)),
+	    					  start: data.event[i].start,
+	    					  end: data.event[i].end,
+	    					  color: data.event[i].color,
+	    					  url : data.event[i].url,
+	    					  title: decodeURIComponent(data.event[i].title).replace('+', ' ')
+	    				  });
+	    				  
+	    			  }
+	    			  
+	    			  callback(events);
+	    		  }
+	    	  });
+	      }
+      
+    	});
+  });
+</script>
+<!-- end: Javascript -->
 
           <!-- start: content -->
             <div id="content">
