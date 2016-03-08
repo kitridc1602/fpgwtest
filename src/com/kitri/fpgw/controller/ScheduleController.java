@@ -1,6 +1,5 @@
 package com.kitri.fpgw.controller;
 
-import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
@@ -15,9 +14,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kitri.fpgw.model.ScheduleDto;
+import com.kitri.fpgw.model.ScheduleModifyDto;
 import com.kitri.fpgw.model.UserMainDto;
 import com.kitri.fpgw.service.ScheduleService;
 import com.kitri.fpgw.util.Encoder;
+import com.kitri.fpgw.util.StringClass;
 
 @Controller
 @RequestMapping(value="/schedule")
@@ -31,6 +32,12 @@ public class ScheduleController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("jsp/schedule/schedulemodify");
+		
+		if(scheduleDto.getStrUser() != null){
+		
+			ScheduleDto scheduleOutDto = scheduleService.ScheduleSelect(scheduleDto);
+			mav.addObject("schedule", scheduleOutDto);
+		}
 		
 		return mav;
 		
@@ -48,8 +55,6 @@ public class ScheduleController {
 		
 		return ScheduleSelectAll("老沥包府 >> 傍俺老沥");
 	}
-	
-	
 	
 	@RequestMapping(value="/insert.html")
 	public String ScheduleInsert(ScheduleDto scheduleDto) throws Exception {
@@ -71,18 +76,24 @@ public class ScheduleController {
 	}
 	
 	@RequestMapping(value="/modify.html")
-	public String ScheduleModify(ScheduleDto scheduleDto) throws Exception {
+	public ModelAndView ScheduleModify(ScheduleModifyDto scheduleModifyDto) throws Exception {
 		
+		scheduleModifyDto.setStrWorkID(StringClass.NewWorkIDCreate());
+		scheduleModifyDto.setStrWork_User(scheduleModifyDto.getStrEdit_User_Cd());
 		
+		scheduleService.ScheduleModify(scheduleModifyDto);
 		
-		return "";
+		return ScheduleSelectAll("001");
 	}
 	
 	@RequestMapping(value="/delete.html")
-	public String ScheduleDelete(ScheduleDto scheduleDto) throws Exception {
+	public ModelAndView ScheduleDelete(ScheduleDto scheduleDto) throws Exception {
 
+		System.out.println("ScheduleDelete");
+		scheduleService.ScheduleDelete(scheduleDto);
 		
-		return "";
+		System.out.println("scheduleService.ScheduleDelete(scheduleDto)");
+		return ScheduleSelectAll("001");
 	}
 	
 	@RequestMapping(value="/calenderview.html")
@@ -126,8 +137,8 @@ public class ScheduleController {
 				jsonObject.put("end", jsonSchedule.getStrYY() + "-" + jsonSchedule.getStrMM() + "-" + jsonSchedule.getStrDD() + "T" + jsonSchedule.getStrEnd_Hour() + ":" + jsonSchedule.getStrEnd_Minute() + ":00");
 				jsonObject.put("color", "#7BB4E0");
 			}
-			jsonObject.put("url", "${root }/schedule/select.html?strUser=" + jsonSchedule.getStrUser() + "&strYY=" + jsonSchedule.getStrYY() + "&strMM=" + jsonSchedule.getStrMM() + "&strDD=" + jsonSchedule.getStrDD() + "&intSeq=" + jsonSchedule.getIntSeq());
-			jsonObject.put("title", URLEncoder.encode(jsonSchedule.getStrTitle(), "UTF-8"));
+			jsonObject.put("url", "select.html?strUser=" + jsonSchedule.getStrUser() + "&strYY=" + jsonSchedule.getStrYY() + "&strMM=" + jsonSchedule.getStrMM() + "&strDD=" + jsonSchedule.getStrDD() + "&intSeq=" + jsonSchedule.getIntSeq());
+			jsonObject.put("title", Encoder.urlToUTF(jsonSchedule.getStrTitle()));
 			System.out.println(jsonObject);
 			
 			arraySchedule.add(jsonObject);

@@ -104,13 +104,17 @@
 	                   						<tr>
 	                   							<td style="width: 10%; text-align: center;">제목</td>
 	                   							<td style="width: 90%;" colspan="3">
-	                   								<input type="text" id="strTitle" name="strTitle" class="form-control" style="width: 100%;" value="">
+	                   								<input type="text" id="strTitle" name="strTitle" class="form-control" style="width: 100%;" value="${schedule.strTitle }">
+	                   								<input type="hidden" id="intSeq" name="intSeq" value="${schedule.intSeq }">
+	                   								<input type="hidden" id="strPrevYY" name="strPrevYY" value="${schedule.strYY }">
+	                   								<input type="hidden" id="strPrevMM" name="strPrevMM" value="${schedule.strMM }">
+	                   								<input type="hidden" id="strPrevDD" name="strPrevDD" value="${schedule.strDD }">
 	                   							</td>
 	                   						</tr>
 	                   						<tr>
 	                   							<td style="width: 10%; text-align: center;">내용</td>
 	                   							<td colspan="3">
-	                   								<textarea id="strDetail_Comment" name="strDetail_Comment" rows="7" cols="" class="form-control" style="width: 100%;"></textarea>
+	                   								<textarea id="strDetail_Comment" name="strDetail_Comment" rows="7" cols="" class="form-control" style="width: 100%;">${schedule.strDetail_Comment }</textarea>
 	                   							</td>
 	                   						</tr>
 	                   						<tr>
@@ -119,7 +123,7 @@
 	                   								&nbsp;&nbsp;
 		                   							<c:forEach var="workKind" items="${sessionScope.workKind }">
 		                   								<c:choose>
-		                   									<c:when test="${workKind.strSCode eq strSch_Kind_Cd }">
+		                   									<c:when test="${workKind.strSCode eq schedule.strSch_Kind_Cd }">
 		                   										<input type="radio" id="strSch_Kind_Cd" name="strSch_Kind_Cd" value="${workKind.strSCode }" checked="checked">${workKind.strName }&nbsp;&nbsp;&nbsp;
 		                   									</c:when>
 		                   								
@@ -132,11 +136,11 @@
 	                   						</tr>
 	                   						<tr>
 	                   							<td colspan="3">
-	                   								<input type="text" id="strYY" name="strYY" style="width: 15%; text-align: center;" readonly="readonly" value="">
+	                   								<input type="text" id="strYY" name="strYY" style="width: 15%; text-align: center;" readonly="readonly" value="${schedule.strYY }">
 	                   								<span>년</span>
-	                   								<input type="text" id="strMM" name="strMM" style="width: 10%; text-align: center;" readonly="readonly" value="">
+	                   								<input type="text" id="strMM" name="strMM" style="width: 10%; text-align: center;" readonly="readonly" value="${schedule.strMM }">
 	                   								<span>월</span>
-	                   								<input type="text" id="strDD" name="strDD" style="width: 10%; text-align: center;" readonly="readonly" value="">
+	                   								<input type="text" id="strDD" name="strDD" style="width: 10%; text-align: center;" readonly="readonly" value="${schedule.strDD }">
 	                   								<span>일</span>
 	                   								<a href="#" class="date" ><i class="fa fa-calendar"></i></a>
 	                   							</td>
@@ -151,7 +155,7 @@
 	                   										</c:if>
 	                   										
 	                   										<c:choose>
-	                   											<c:when test="">
+	                   											<c:when test="${startHour eq schedule.strStart_Hour }">
 	                   												<option value="${startHour }" selected="selected" >${startHour }</option>
 	                   											</c:when>
 	                   											
@@ -170,7 +174,7 @@
 	                   										</c:if>
 	                   										
 	                   										<c:choose>
-	                   											<c:when test="">
+	                   											<c:when test="${startMinute eq schedule.strStart_Minute }">
 	                   												<option value="${startMinute }" selected="selected" >${startMinute }</option>
 	                   											</c:when>
 	                   											
@@ -189,7 +193,7 @@
 	                   										</c:if>
 	                   										
 	                   										<c:choose>
-	                   											<c:when test="">
+	                   											<c:when test="${endHour eq schedule.strEnd_Hour }">
 	                   												<option value="${endHour }" selected="selected" >${endHour }</option>
 	                   											</c:when>
 	                   											
@@ -208,7 +212,7 @@
 	                   										</c:if>
 	                   										
 	                   										<c:choose>
-	                   											<c:when test="">
+	                   											<c:when test="${endMinute eq schedule.strEnd_Minute }">
 	                   												<option value="${endMinute }" selected="selected" >${endMinute }</option>
 	                   											</c:when>
 	                   											
@@ -226,15 +230,15 @@
 	                   							<td>
 	                   								<select style="width: 50%;" id="strWork_Kind_Cd" name="strWork_Kind_Cd">
 		                                    			<option value="000" selected="selected">선택</option>
-		                                    				<c:forEach var="workKind" items="${sessionScope.schKind }">
+		                                    				<c:forEach var="schKind" items="${sessionScope.schKind }">
 		                                    					
 		                                    					<c:choose>
-		                                    						<c:when test="${schedule.strWork_kind_Cd eq workKind.strSCode }">
-		                                    							<option value="${workKind.strSCode }" selected="selected">${workKind.strName }</option>
+		                                    						<c:when test="${schedule.strWork_Kind_Cd eq schKind.strSCode }">
+		                                    							<option value="${schKind.strSCode }" selected="selected">${schKind.strName }</option>
 		                                    						</c:when>
 		                                    							
 		                                    						<c:otherwise>
-		                                    							<option value="${workKind.strSCode }">${workKind.strName }</option>	
+		                                    							<option value="${schKind.strSCode }">${schKind.strName }</option>	
 		                                    						</c:otherwise>
 		                                    					</c:choose>
 		                                    				</c:forEach>

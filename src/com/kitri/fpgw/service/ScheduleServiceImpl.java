@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.kitri.fpgw.dao.ScheduleDao;
 import com.kitri.fpgw.model.ScheduleDto;
+import com.kitri.fpgw.model.ScheduleModifyDto;
 
 @Service
 public class ScheduleServiceImpl implements ScheduleService {
@@ -16,8 +17,8 @@ public class ScheduleServiceImpl implements ScheduleService {
 	
 	@Override
 	public ScheduleDto ScheduleSelect(ScheduleDto scheduleDto) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return scheduleDao.ScheduleSelect(scheduleDto);
 	}
 
 	@Override
@@ -33,15 +34,16 @@ public class ScheduleServiceImpl implements ScheduleService {
 	}
 
 	@Override
-	public void ScheduleModify(ScheduleDto scheduleDto) throws Exception {
-		// TODO Auto-generated method stub
+	public void ScheduleModify(ScheduleModifyDto scheduleModifyDto) throws Exception {
 
+		scheduleDao.ScheduleModify(scheduleModifyDto);
 	}
 
 	@Override
 	public void ScheduleDelete(ScheduleDto scheduleDto) throws Exception {
-		// TODO Auto-generated method stub
-
+		
+		System.out.println("scheduleDao.ScheduleDelete");
+		scheduleDao.ScheduleDelete(scheduleDto);
 	}
 
 }
